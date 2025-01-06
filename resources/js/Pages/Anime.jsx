@@ -1,10 +1,22 @@
 import AnimeBigDetails from "@/Partials/AnimeBigDetails";
 import AnimeCharacters from "@/Partials/AnimeCharacters";
 import AnimeEpisodes from "@/Partials/AnimeEpisodes";
+import AnimeIframePlayer from "@/Partials/AnimeIframePlayer";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Anime = ({ animeId }) => {
+    const [episodeId, setEpisodeId] = useState(null);
+
+    // Extract the episodeId from the URL query string and store it in state
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fetchedEpisodeId = urlParams.get("episodeId");
+        if (fetchedEpisodeId) {
+            setEpisodeId(fetchedEpisodeId);
+        }
+    }, []);
+
     const fecthAnimeInfo = async () => {
         const { data } = await axios.get(
             "https://anime-host-api.vercel.app/meta/anilist/info/" + animeId
@@ -35,6 +47,11 @@ const Anime = ({ animeId }) => {
             ) : (
                 <div className="grid grid-cols-5 gap-5">
                     <div className="col-span-4">
+                        {episodeId ? (
+                            <AnimeIframePlayer episodeId={episodeId} />
+                        ) : (
+                            <AnimeIframePlayer anime={anime} />
+                        )}
                         <AnimeBigDetails anime={anime} />
                         <div className="divider"></div>
                         <AnimeCharacters anime={anime} />

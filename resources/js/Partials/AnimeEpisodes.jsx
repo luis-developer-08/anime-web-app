@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/react";
 import React, { useState } from "react";
 
 const AnimeEpisodes = ({ anime, isLoading }) => {
@@ -24,10 +25,14 @@ const AnimeEpisodes = ({ anime, isLoading }) => {
         );
     };
 
+    const onSelectedAnimeEpisode = (episodeId) => {
+        router.visit("/anime/" + anime.id + "?episodeId=" + episodeId);
+    };
+
     return (
         <div>
             <h1 className="text-lg font-bold text-center">Episodes</h1>
-            <div className="mt-4  h-[70vh] overflow-y-auto">
+            <div className="mt-4 h-[70vh] overflow-y-auto">
                 {isLoading ? (
                     <div className="flex flex-wrap justify-center gap-2">
                         {Array.from({ length: 12 }).map((_, index) => (
@@ -37,7 +42,7 @@ const AnimeEpisodes = ({ anime, isLoading }) => {
                             ></div>
                         ))}
                     </div>
-                ) : (
+                ) : anime.episodes && anime.episodes.length > 0 ? (
                     groupedEpisodes.map((group, groupIndex) => (
                         <div
                             key={groupIndex}
@@ -57,7 +62,9 @@ const AnimeEpisodes = ({ anime, isLoading }) => {
                                     {group.map((episode) => (
                                         <button
                                             onClick={() =>
-                                                AnimeEpisodeOnSelect(episode.id)
+                                                onSelectedAnimeEpisode(
+                                                    episode.id
+                                                )
                                             }
                                             key={episode.id}
                                             className="btn btn-sm bg-slate-400 rounded-md w-full text-xs"
@@ -69,6 +76,10 @@ const AnimeEpisodes = ({ anime, isLoading }) => {
                             )}
                         </div>
                     ))
+                ) : (
+                    <p className="text-center text-gray-500">
+                        No episodes available.
+                    </p>
                 )}
             </div>
         </div>
