@@ -25,6 +25,6 @@
         "@splidejs/react-splide": "^0.7.12",
         "@tanstack/react-query": "^5.62.15",
         "react-icons": "^5.4.0",
-        "react-player": "^2.16.0"
+        "react-iframe": "^1.8.5"
     }
 }
