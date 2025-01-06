@@ -56,8 +56,13 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
 
     useEffect(() => {
         // Auto-open group when episodeId changes, unless manually toggled
-        if (!manualToggle && currentGroupIndex >= 0) {
-            setExpandedGroup(currentGroupIndex);
+        if (!manualToggle) {
+            if (episodeId === null) {
+                // Open the first group (1-100) if episodeId is null
+                setExpandedGroup(0);
+            } else if (currentGroupIndex >= 0) {
+                setExpandedGroup(currentGroupIndex);
+            }
         }
     }, [episodeId, currentGroupIndex, manualToggle]);
 
