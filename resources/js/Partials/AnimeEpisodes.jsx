@@ -1,8 +1,9 @@
 import { router } from "@inertiajs/react";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const AnimeEpisodes = ({ anime, isLoading, episodeId }) => {
-    // Helper function to chunk the episodes array
+const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
+    const episodes = anime.episodes || [];
+
     const chunkArray = (array, size) => {
         const chunks = [];
         for (let i = 0; i < array.length; i += size) {
@@ -11,49 +12,90 @@ const AnimeEpisodes = ({ anime, isLoading, episodeId }) => {
         return chunks;
     };
 
-    // Group episodes by 100
-    const groupedEpisodes = isLoading
-        ? null
-        : chunkArray(anime.episodes || [], 100);
+    const groupedEpisodes = isLoading ? [] : chunkArray(episodes, 100);
 
-    // Automatically expand the group containing the episodeId, or first group if episodeId is null
-    const getInitialExpandedGroup = () => {
-        if (!groupedEpisodes) return null;
+    const currentEpisodeIndex = episodes.findIndex(
+        (episode) => episode.id === episodeId
+    );
 
-        // If episodeId is null, auto-expand the first group
-        if (!episodeId) return 0;
+    const currentGroupIndex = Math.floor(currentEpisodeIndex / 100);
 
-        for (let i = 0; i < groupedEpisodes.length; i++) {
-            if (
-                groupedEpisodes[i].some((episode) => episode.id === episodeId)
-            ) {
-                return i;
-            }
-        }
-        return null;
+    const [expandedGroup, setExpandedGroup] = useState(
+        currentGroupIndex >= 0 ? currentGroupIndex : null
+    );
+
+    const [manualToggle, setManualToggle] = useState(false);
+
+    const onSelectedAnimeEpisode = (newEpisodeId) => {
+        router.visit(`/anime/${anime.id}?episodeId=${newEpisodeId}`);
     };
 
-    const [expandedGroup, setExpandedGroup] = useState(getInitialExpandedGroup);
+    const handlePrev = () => {
+        if (currentEpisodeIndex > 0) {
+            const prevEpisodeId = episodes[currentEpisodeIndex - 1].id;
+            onSelectedAnimeEpisode(prevEpisodeId);
+        }
+    };
+
+    const handleNext = () => {
+        if (
+            currentEpisodeIndex >= 0 &&
+            currentEpisodeIndex < episodes.length - 1
+        ) {
+            const nextEpisodeId = episodes[currentEpisodeIndex + 1].id;
+            onSelectedAnimeEpisode(nextEpisodeId);
+        }
+    };
 
     const toggleGroup = (groupIndex) => {
         setExpandedGroup((prevGroup) =>
             prevGroup === groupIndex ? null : groupIndex
         );
-    };
-
-    const onSelectedAnimeEpisode = (episodeId) => {
-        router.visit("/anime/" + anime.id + "?episodeId=" + episodeId);
+        setManualToggle(true); // Mark manual toggling
     };
 
     useEffect(() => {
-        // Auto-expand the group containing the selected episode on component mount
-        const initialGroup = getInitialExpandedGroup();
-        if (initialGroup !== null) setExpandedGroup(initialGroup);
-    }, [groupedEpisodes, episodeId]);
+        // Auto-open group when episodeId changes, unless manually toggled
+        if (!manualToggle && currentGroupIndex >= 0) {
+            setExpandedGroup(currentGroupIndex);
+        }
+    }, [episodeId, currentGroupIndex, manualToggle]);
+
+    useEffect(() => {
+        // Reset manual toggle when episodeId changes
+        setManualToggle(false);
+    }, [episodeId]);
 
     return (
-        <div>
-            <h1 className="text-lg font-bold">Episodes</h1>
+        <div className="mb-5">
+            <div className="flex justify-between items-center">
+                <h1 className="text-lg font-bold">Episodes</h1>
+                <div className="join">
+                    <button
+                        onClick={handlePrev}
+                        className="join-item btn btn-xs bg-slate-300 border-0"
+                        disabled={currentEpisodeIndex <= 0}
+                    >
+                        Prev
+                    </button>
+                    <input
+                        type="text"
+                        className="input-xs join-item input w-12"
+                        value={currentEpisodeIndex + 1} // Show as 1-based index
+                        disabled
+                    />
+                    <button
+                        onClick={handleNext}
+                        className="join-item btn btn-xs bg-slate-300 border-0"
+                        disabled={
+                            currentEpisodeIndex === -1 ||
+                            currentEpisodeIndex >= episodes.length - 1
+                        }
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
             <div className="mt-4 h-[40vh] overflow-y-auto">
                 {isLoading ? (
                     <div className="flex flex-wrap justify-center gap-2">
@@ -64,7 +106,7 @@ const AnimeEpisodes = ({ anime, isLoading, episodeId }) => {
                             ></div>
                         ))}
                     </div>
-                ) : anime.episodes && anime.episodes.length > 0 ? (
+                ) : episodes.length > 0 ? (
                     groupedEpisodes.map((group, groupIndex) => (
                         <div
                             key={groupIndex}

@@ -43,14 +43,11 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
             <h3 className="font-bold text-lg mb-2">
                 {anime.title.english || anime.title.userPreferred}
             </h3>
-            {/* Embed YouTube video using the embed URL */}
-            {anime.trailer.id && (
+
+            {/* Conditional rendering of iframe based on trailer data */}
+            {anime.trailer?.id && (
                 <iframe
-                    src={
-                        "https://www.youtube.com/embed/" +
-                        anime.trailer.id +
-                        "?autoplay=1" // Autoplay and mute on load
-                    }
+                    src={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1`} // Autoplay and mute on load
                     width="100%"
                     height="200"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

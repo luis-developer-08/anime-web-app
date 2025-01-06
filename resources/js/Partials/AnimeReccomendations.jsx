@@ -9,7 +9,7 @@ const AnimeReccomendations = ({ anime, isLoading }) => {
     return (
         <div>
             <h1 className="text-lg font-bold">Anime You Might Like</h1>
-            <div className="mt-4">
+            <div className="mt-4 h-[70vh] overflow-y-auto overflow-x-hidden">
                 {isLoading
                     ? // Skeleton loader for anime recommendations
                       Array.from({ length: 5 }).map((_, index) => (
@@ -29,12 +29,12 @@ const AnimeReccomendations = ({ anime, isLoading }) => {
                           <div
                               key={anime.id}
                               onClick={() => onSelectedAnime(anime.id)}
-                              className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-105 transition-transform duration-300 ease-in hover:cursor-pointer"
+                              className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
                           >
                               <img
                                   src={anime.image}
                                   alt={anime.title.userPreferred}
-                                  className="h-full object-cover mr-4 rounded-s-md"
+                                  className="h-full w-16 object-cover bg-white mr-4 rounded-s-md"
                               />
                               <div>
                                   <h2 className="font-bold text-xs">

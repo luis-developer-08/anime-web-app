@@ -3,6 +3,7 @@ import AnimeCharacters from "@/Partials/AnimeCharacters";
 import AnimeEpisodes from "@/Partials/AnimeEpisodes";
 import AnimeIframePlayer from "@/Partials/AnimeIframePlayer";
 import AnimeReccomendations from "@/Partials/AnimeReccomendations";
+import { Head } from "@inertiajs/react";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 
@@ -33,6 +34,14 @@ const Anime = ({ animeId }) => {
 
     return (
         <div>
+            {isLoading ? (
+                <></>
+            ) : (
+                <Head
+                    title={anime.title.userPreferred || anime.title.english}
+                />
+            )}
+
             {isLoading ? (
                 <div className="grid grid-cols-5 gap-5">
                     <div className="col-span-4">

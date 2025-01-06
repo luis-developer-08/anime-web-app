@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Iframe from "react-iframe";
 
 const AnimeIframePlayer = ({
@@ -8,6 +8,8 @@ const AnimeIframePlayer = ({
     episodeId,
     isLoadingAnimeIframePlayer,
 }) => {
+    const iframeRef = useRef(null); // Create a ref to the iframe
+
     const fetchAnimeStreamLinks = async () => {
         const { data } = await axios.get(
             `https://api-anime-taupe.vercel.app/anime/gogoanime/watch/${episodeId}`
@@ -20,6 +22,27 @@ const AnimeIframePlayer = ({
         queryKey: ["fetchAnimeStreamLinks", episodeId],
         enabled: !!episodeId,
     });
+
+    useEffect(() => {
+        // If the iframe exists, add the click event listener to prevent redirection
+        const iframe = iframeRef.current;
+
+        if (iframe) {
+            const handleIframeClick = (event) => {
+                event.preventDefault(); // Prevent default behavior (such as opening a new tab)
+                alert("Iframe clicked! Preventing redirection.");
+                // Optional: You can perform custom logic here, like opening in the same window
+                // window.location.href = iframe.src;
+            };
+
+            iframe.addEventListener("click", handleIframeClick);
+
+            // Cleanup: Remove the event listener when the component unmounts
+            return () => {
+                iframe.removeEventListener("click", handleIframeClick);
+            };
+        }
+    }, []);
 
     return (
         <div style={{ position: "relative", width: "100%" }}>
@@ -44,7 +67,6 @@ const AnimeIframePlayer = ({
                     {episodeId ? (
                         <>
                             {isLoading ? (
-                                // Loader overlay with DaisyUI spinner
                                 <div
                                     style={{
                                         top: 0,
@@ -62,6 +84,7 @@ const AnimeIframePlayer = ({
                                 </div>
                             ) : (
                                 <Iframe
+                                    ref={iframeRef} // Attach the ref to the iframe
                                     url={data.headers.Referer}
                                     width="100%"
                                     height="600px"

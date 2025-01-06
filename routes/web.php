@@ -26,6 +26,10 @@ Route::get('/flix-hq', function () {
     return Inertia::render('FlixHQ');
 });
 
+// Route::get('/anime/genre/{genreId}', function ($genreId) {
+//     return Inertia::render('Genre', ['genreId' => $genreId]);
+// });
+
 Route::get('/anime/{animeId}', function ($animeId) {
     return Inertia::render('Anime', ['animeId' => $animeId]);
 });

@@ -3,7 +3,15 @@ import Navbar from "@/Components/Navbar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false, // Disable refetching when the window regains focus
+            // refetchOnReconnect: false, // Disable refetching when the network reconnects
+            staleTime: 1000 * 60 * 5, // Data will stay fresh for 5 minutes
+        },
+    },
+});
 
 const Main = ({ children }) => {
     const [isOnline, setIsOnline] = useState(true);
