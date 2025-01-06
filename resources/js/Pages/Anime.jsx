@@ -8,7 +8,6 @@ import React, { useEffect, useState } from "react";
 const Anime = ({ animeId }) => {
     const [episodeId, setEpisodeId] = useState(null);
 
-    // Extract the episodeId from the URL query string and store it in state
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const fetchedEpisodeId = urlParams.get("episodeId");
