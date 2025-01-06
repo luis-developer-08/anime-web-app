@@ -53,8 +53,8 @@ const AnimeEpisodes = ({ anime, isLoading, episodeId }) => {
 
     return (
         <div>
-            <h1 className="text-lg font-bold text-center">Episodes</h1>
-            <div className="mt-4 h-[70vh] overflow-y-auto">
+            <h1 className="text-lg font-bold">Episodes</h1>
+            <div className="mt-4 h-[40vh] overflow-y-auto">
                 {isLoading ? (
                     <div className="flex flex-wrap justify-center gap-2">
                         {Array.from({ length: 12 }).map((_, index) => (

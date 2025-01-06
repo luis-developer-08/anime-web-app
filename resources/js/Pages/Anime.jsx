@@ -2,6 +2,7 @@ import AnimeBigDetails from "@/Partials/AnimeBigDetails";
 import AnimeCharacters from "@/Partials/AnimeCharacters";
 import AnimeEpisodes from "@/Partials/AnimeEpisodes";
 import AnimeIframePlayer from "@/Partials/AnimeIframePlayer";
+import AnimeReccomendations from "@/Partials/AnimeReccomendations";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 
@@ -47,6 +48,7 @@ const Anime = ({ animeId }) => {
                     </div>
                     <div className="col-span-1">
                         <AnimeEpisodes isLoading={isLoading} />
+                        <AnimeReccomendations isLoading={isLoading} />
                     </div>
                 </div>
             ) : (
@@ -66,6 +68,7 @@ const Anime = ({ animeId }) => {
                     </div>
                     <div className="col-span-1">
                         <AnimeEpisodes anime={anime} episodeId={episodeId} />
+                        <AnimeReccomendations anime={anime} />
                     </div>
                 </div>
             )}
