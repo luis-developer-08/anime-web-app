@@ -1,14 +1,14 @@
 import { router } from "@inertiajs/react";
 import React from "react";
 
-const AnimeReccomendations = ({ anime, isLoading }) => {
+const AnimeRelated = ({ anime, isLoading }) => {
     const onSelectedAnime = (animeId) => {
         router.visit("/anime/" + animeId);
     };
 
     return (
-        <div className="mb-10">
-            <h1 className="text-lg font-bold">Recommended Anime</h1>
+        <div>
+            <h1 className="text-lg font-bold">Related Anime</h1>
             <div className="mt-4 h-[70vh] overflow-y-auto overflow-x-hidden">
                 {isLoading
                     ? // Skeleton loader for anime recommendations
@@ -25,7 +25,7 @@ const AnimeReccomendations = ({ anime, isLoading }) => {
                               </div>
                           </div>
                       ))
-                    : anime.recommendations.map((anime) => (
+                    : anime.relations.map((anime) => (
                           <div
                               key={anime.id}
                               onClick={() => onSelectedAnime(anime.id)}
@@ -57,4 +57,4 @@ const AnimeReccomendations = ({ anime, isLoading }) => {
     );
 };
 
-export default AnimeReccomendations;
+export default AnimeRelated;

@@ -1,8 +1,10 @@
+import NextAiringEpisode from "@/Components/NextAiringEpisode";
 import AnimeBigDetails from "@/Partials/AnimeBigDetails";
 import AnimeCharacters from "@/Partials/AnimeCharacters";
 import AnimeEpisodes from "@/Partials/AnimeEpisodes";
 import AnimeIframePlayer from "@/Partials/AnimeIframePlayer";
 import AnimeReccomendations from "@/Partials/AnimeReccomendations";
+import AnimeRelated from "@/Partials/AnimeRelated";
 import { Head } from "@inertiajs/react";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
@@ -18,7 +20,7 @@ const Anime = ({ animeId }) => {
         }
     }, []);
 
-    const fecthAnimeInfo = async () => {
+    const fetchAnimeInfo = async () => {
         const { data } = await axios.get(
             "https://anime-host-api.vercel.app/meta/anilist/info/" + animeId
         );
@@ -26,11 +28,9 @@ const Anime = ({ animeId }) => {
     };
 
     const { data: anime, isLoading } = useQuery({
-        queryFn: fecthAnimeInfo,
-        queryKey: ["fecthAnimeInfo", animeId],
+        queryFn: fetchAnimeInfo,
+        queryKey: ["fetchAnimeInfo", animeId],
     });
-
-    // console.log(data);
 
     return (
         <div>
@@ -58,6 +58,7 @@ const Anime = ({ animeId }) => {
                     <div className="col-span-1">
                         <AnimeEpisodes isLoading={isLoading} />
                         <AnimeReccomendations isLoading={isLoading} />
+                        <AnimeRelated isLoading={isLoading} />
                     </div>
                 </div>
             ) : (
@@ -76,8 +77,16 @@ const Anime = ({ animeId }) => {
                         <AnimeCharacters anime={anime} />
                     </div>
                     <div className="col-span-1">
+                        {anime.nextAiringEpisode ? (
+                            <NextAiringEpisode
+                                nextAiringEpisode={anime.nextAiringEpisode}
+                            />
+                        ) : (
+                            <></>
+                        )}
                         <AnimeEpisodes anime={anime} episodeId={episodeId} />
                         <AnimeReccomendations anime={anime} />
+                        <AnimeRelated anime={anime} />
                     </div>
                 </div>
             )}
