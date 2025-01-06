@@ -84,7 +84,6 @@ const AnimeIframePlayer = ({ anime, episodeId }) => {
                     )}
                 </>
             ) : (
-                // Use ReactPlayer for trailer playback
                 <ReactPlayer
                     url={`https://www.youtube.com/watch?v=${anime.trailer.id}?autoplay=1`}
                     width="100%"
