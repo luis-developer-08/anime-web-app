@@ -8,8 +8,7 @@ const AnimeIframePlayer = ({ anime, episodeId }) => {
 
     const fetchAnimeStreamLinks = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/anime/gogoanime/watch/" +
-                episodeId
+            "https://anime-host-api.vercel.app/meta/anilist/watch/" + episodeId
         );
         return data;
     };
@@ -67,12 +66,7 @@ const AnimeIframePlayer = ({ anime, episodeId }) => {
 
                             {/* Video Player with react-iframe */}
                             <Iframe
-                                url={
-                                    data.sources.find(
-                                        (source) =>
-                                            source.quality === selectedQuality
-                                    ).url
-                                }
+                                url={data.headers.Referer}
                                 width="100%"
                                 height="500px"
                                 className="mb-4"
