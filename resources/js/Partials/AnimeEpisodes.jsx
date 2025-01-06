@@ -1,0 +1,78 @@
+import React, { useState } from "react";
+
+const AnimeEpisodes = ({ anime, isLoading }) => {
+    // Helper function to chunk the episodes array
+    const chunkArray = (array, size) => {
+        const chunks = [];
+        for (let i = 0; i < array.length; i += size) {
+            chunks.push(array.slice(i, i + size));
+        }
+        return chunks;
+    };
+
+    // Group episodes by 100
+    const groupedEpisodes = isLoading
+        ? null
+        : chunkArray(anime.episodes || [], 100);
+
+    // Initialize the first group (index 0) as expanded
+    const [expandedGroup, setExpandedGroup] = useState(0);
+
+    const toggleGroup = (groupIndex) => {
+        setExpandedGroup((prevGroup) =>
+            prevGroup === groupIndex ? null : groupIndex
+        );
+    };
+
+    return (
+        <div>
+            <h1 className="text-lg font-bold text-center">Episodes</h1>
+            <div className="mt-4  h-[70vh] overflow-y-auto">
+                {isLoading ? (
+                    <div className="flex flex-wrap justify-center gap-2">
+                        {Array.from({ length: 12 }).map((_, index) => (
+                            <div
+                                key={index}
+                                className="w-16 h-8 rounded-md skeleton"
+                            ></div>
+                        ))}
+                    </div>
+                ) : (
+                    groupedEpisodes.map((group, groupIndex) => (
+                        <div
+                            key={groupIndex}
+                            className="mb-1 border rounded-md shadow-sm"
+                        >
+                            <div
+                                className="flex justify-between items-center px-4 py-2 cursor-pointer"
+                                onClick={() => toggleGroup(groupIndex)}
+                            >
+                                <h2 className="text-sm">
+                                    Episodes {groupIndex * 100 + 1} -{" "}
+                                    {(groupIndex + 1) * 100}
+                                </h2>
+                            </div>
+                            {expandedGroup === groupIndex && (
+                                <div className="grid grid-cols-5 p-1">
+                                    {group.map((episode) => (
+                                        <button
+                                            onClick={() =>
+                                                AnimeEpisodeOnSelect(episode.id)
+                                            }
+                                            key={episode.id}
+                                            className="btn btn-sm bg-slate-400 rounded-md w-full text-xs"
+                                        >
+                                            {episode.number}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default AnimeEpisodes;

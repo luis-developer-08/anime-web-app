@@ -40,6 +40,9 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
                 opacity: hoveredAnime?.id === anime.id ? 1 : 0, // Fade in/out effect
             }}
         >
+            <h3 className="font-bold text-lg mb-2">
+                {anime.title.english || anime.title.userPreferred}
+            </h3>
             {/* Embed YouTube video using the embed URL */}
             {anime.trailer.id && (
                 <iframe
@@ -59,9 +62,6 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
                 ></iframe>
             )}
 
-            <h3 className="font-bold text-lg mb-2">
-                {anime.title.english || anime.title.userPreferred}
-            </h3>
             <div
                 className="text-sm"
                 dangerouslySetInnerHTML={{

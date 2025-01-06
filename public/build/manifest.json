@@ -1,6 +1,27 @@
 {
+  "_DramaDetails-DZlRXEd4.js": {
+    "file": "assets/DramaDetails-DZlRXEd4.js",
+    "name": "DramaDetails",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_index-CTLOHlYR.js": {
+    "file": "assets/index-CTLOHlYR.js",
+    "name": "index",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_useQuery-BRd98o3R.js": {
+    "file": "assets/useQuery-BRd98o3R.js",
+    "name": "useQuery",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
   "resources/js/Pages/About.jsx": {
-    "file": "assets/About-B0oBFLTi.js",
+    "file": "assets/About-D8cZUTFt.js",
     "name": "About",
     "src": "resources/js/Pages/About.jsx",
     "isDynamicEntry": true,
@@ -8,29 +29,65 @@
       "resources/js/app.jsx"
     ]
   },
+  "resources/js/Pages/Anime.jsx": {
+    "file": "assets/Anime-DW6-K8oI.js",
+    "name": "Anime",
+    "src": "resources/js/Pages/Anime.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_useQuery-BRd98o3R.js"
+    ]
+  },
+  "resources/js/Pages/DramaCool.jsx": {
+    "file": "assets/DramaCool-C4RuxryQ.js",
+    "name": "DramaCool",
+    "src": "resources/js/Pages/DramaCool.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-CTLOHlYR.js",
+      "_useQuery-BRd98o3R.js",
+      "_DramaDetails-DZlRXEd4.js"
+    ]
+  },
+  "resources/js/Pages/FlixHQ.jsx": {
+    "file": "assets/FlixHQ-9qobvaPM.js",
+    "name": "FlixHQ",
+    "src": "resources/js/Pages/FlixHQ.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-CTLOHlYR.js",
+      "_useQuery-BRd98o3R.js",
+      "_DramaDetails-DZlRXEd4.js"
+    ]
+  },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-C-Y7cJQA.js",
+    "file": "assets/Home-GOSltqx8.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.jsx"
-    ],
-    "css": [
-      "assets/Home-D3IVrRzL.css"
+      "resources/js/app.jsx",
+      "_index-CTLOHlYR.js",
+      "_useQuery-BRd98o3R.js"
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-Cqdvpu72.js",
+    "file": "assets/app-D1qxSNdp.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "dynamicImports": [
       "resources/js/Pages/About.jsx",
+      "resources/js/Pages/Anime.jsx",
+      "resources/js/Pages/DramaCool.jsx",
+      "resources/js/Pages/FlixHQ.jsx",
       "resources/js/Pages/Home.jsx"
     ],
     "css": [
-      "assets/app-LL1Dng3G.css"
+      "assets/app-nuSjaMGw.css"
     ]
   }
 }

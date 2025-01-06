@@ -1,31 +1,26 @@
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import AnimeDetails from "@/Components/AnimeDetails";
-import { router } from "@inertiajs/react";
+import DramaDetails from "@/Components/DramaDetails";
 
-const FlexAnime = ({ category }) => {
+const FlexFlixHQ = ({ category }) => {
     const loaders = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const [page, setPage] = useState(1);
-    const [hoveredAnime, setHoveredAnime] = useState(null);
+    const [hoveredDrama, setHoveredDrama] = useState(null);
 
-    const fetchAnime = async () => {
+    const fetchDrama = async () => {
         const { data } = await axios.get(
-            `https://anime-host-api.vercel.app/meta/anilist/${category}?page=${page}`
+            `https://anime-host-api.vercel.app/movies/dramacool/${category}?page=${page}`
         );
         return data;
     };
 
     const { data, isLoading } = useQuery({
-        queryKey: ["fetchAnime", [category, page]],
-        queryFn: fetchAnime,
+        queryKey: ["fetchDrama", [category, page]],
+        queryFn: fetchDrama,
     });
-
-    const onSelectedAnime = (animeId) => {
-        router.visit("/anime/" + animeId);
-    };
 
     return (
         <>
@@ -94,32 +89,31 @@ const FlexAnime = ({ category }) => {
                 </div>
             </div>
 
-            <div className="flex gap-5 justify-center">
+            <div className="grid grid-cols-10 gap-5 justify-center">
                 {isLoading
                     ? loaders.map((anime) => (
-                          <div className="h-52 w-full rounded-md" key={anime}>
+                          <div className="h-52 rounded-md" key={anime}>
                               <div className="w-full h-full rounded-md shadow-lg shadow-black skeleton" />
                           </div>
                       ))
-                    : data.results.map((anime, index) => (
+                    : data.results.map((drama, index) => (
                           <div
-                              key={anime.id}
+                              key={drama.id}
                               className="relative h-52 rounded-md cursor-pointer"
-                              onMouseEnter={() => setHoveredAnime(anime)}
-                              onMouseLeave={() => setHoveredAnime(null)}
+                              onMouseEnter={() => setHoveredDrama(drama)}
+                              onMouseLeave={() => setHoveredDrama(null)}
                           >
                               <img
-                                  onClick={() => onSelectedAnime(anime.id)}
-                                  src={anime.image}
-                                  alt={anime.title.userPreferred}
+                                  src={drama.image}
+                                  alt={drama.title}
                                   className="w-full h-full rounded-md shadow-lg shadow-black hover:scale-105 transition-transform duration-300 ease-out"
                               />
-                              {hoveredAnime?.id === anime.id && (
-                                  <AnimeDetails
-                                      anime={anime}
+                              {hoveredDrama?.id === drama.id && (
+                                  <DramaDetails
+                                      drama={drama}
                                       index={index}
                                       data={data}
-                                      hoveredAnime={hoveredAnime}
+                                      hoveredDrama={hoveredDrama}
                                   />
                               )}
                           </div>
@@ -129,4 +123,4 @@ const FlexAnime = ({ category }) => {
     );
 };
 
-export default FlexAnime;
+export default FlexFlixHQ;
