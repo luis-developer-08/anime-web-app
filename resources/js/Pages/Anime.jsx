@@ -35,6 +35,12 @@ const Anime = ({ animeId }) => {
             {isLoading ? (
                 <div className="grid grid-cols-5 gap-5">
                     <div className="col-span-4">
+                        <div className="mb-4 px-10">
+                            <AnimeIframePlayer
+                                isLoadingAnimeIframePlayer={isLoading}
+                            />
+                        </div>
+                        <div className="divider"></div>
                         <AnimeBigDetails isLoading={isLoading} />
                         <div className="divider"></div>
                         <AnimeCharacters isLoading={isLoading} />
@@ -53,7 +59,7 @@ const Anime = ({ animeId }) => {
                                 <AnimeIframePlayer anime={anime} />
                             )}
                         </div>
-
+                        <div className="divider"></div>
                         <AnimeBigDetails anime={anime} />
                         <div className="divider"></div>
                         <AnimeCharacters anime={anime} />

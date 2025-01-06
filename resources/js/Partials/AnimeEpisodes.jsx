@@ -16,9 +16,12 @@ const AnimeEpisodes = ({ anime, isLoading, episodeId }) => {
         ? null
         : chunkArray(anime.episodes || [], 100);
 
-    // Automatically expand the group containing the episodeId
+    // Automatically expand the group containing the episodeId, or first group if episodeId is null
     const getInitialExpandedGroup = () => {
-        if (!groupedEpisodes || !episodeId) return null;
+        if (!groupedEpisodes) return null;
+
+        // If episodeId is null, auto-expand the first group
+        if (!episodeId) return 0;
 
         for (let i = 0; i < groupedEpisodes.length; i++) {
             if (
