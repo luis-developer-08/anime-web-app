@@ -1,14 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Iframe from "react-iframe";
 
 const AnimeIframePlayer = ({ anime, episodeId }) => {
-    const [selectedQuality, setSelectedQuality] = useState("default");
-
     const fetchAnimeStreamLinks = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/meta/anilist/watch/" + episodeId
+            `https://api-anime-taupe.vercel.app/anime/gogoanime/watch/${episodeId}`
         );
         return data;
     };
@@ -16,69 +14,47 @@ const AnimeIframePlayer = ({ anime, episodeId }) => {
     const { data, isLoading } = useQuery({
         queryFn: fetchAnimeStreamLinks,
         queryKey: ["fetchAnimeStreamLinks", episodeId],
-        enabled: episodeId != null,
+        enabled: !!episodeId,
     });
 
-    useEffect(() => {
-        if (data) {
-            const availableQualities = data.sources.map(
-                (source) => source.quality
-            );
-            if (!availableQualities.includes(selectedQuality)) {
-                setSelectedQuality("720p");
-            }
-        }
-    }, [data, selectedQuality]);
-
-    const handleQualityChange = (event) => {
-        setSelectedQuality(event.target.value);
-    };
-
     return (
-        <div>
+        <div style={{ position: "relative", width: "100%", height: "650px" }}>
             {episodeId ? (
                 <>
                     {isLoading ? (
-                        <p>Loading...</p>
+                        // Loader overlay with DaisyUI spinner
+                        <div
+                            style={{
+                                top: 0,
+                                left: 0,
+                                width: "100%",
+                                height: "650px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                zIndex: 10,
+                            }}
+                        >
+                            <span className="loading loading-spinner loading-lg text-white"></span>
+                        </div>
                     ) : (
-                        <>
-                            {/* Quality Selector */}
-                            <div className="mb-4">
-                                <label htmlFor="quality" className="mr-2">
-                                    Select Quality:
-                                </label>
-                                <select
-                                    id="quality"
-                                    value={selectedQuality}
-                                    onChange={handleQualityChange}
-                                    className="bg-gray-200 rounded-md select-sm text-xs"
-                                >
-                                    {data.sources.map((source) => (
-                                        <option
-                                            key={source.quality}
-                                            value={source.quality}
-                                        >
-                                            {source.quality}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            {/* Video Player with react-iframe */}
-                            <Iframe
-                                url={data.headers.Referer}
-                                width="100%"
-                                height="500px"
-                                className="mb-4"
-                            />
-                        </>
+                        <Iframe
+                            url={data.headers.Referer}
+                            width="100%"
+                            height="650px"
+                            className="mb-4"
+                            allowFullScreen
+                            allow="autoplay"
+                            position="relative"
+                        />
                     )}
                 </>
             ) : (
                 <Iframe
                     url={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1`}
                     width="100%"
-                    height="500px"
+                    height="650px"
                     allowFullScreen
                     allow="autoplay"
                     className="mb-4"
