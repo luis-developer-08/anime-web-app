@@ -1,7 +1,7 @@
 import { router } from "@inertiajs/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const AnimeEpisodes = ({ anime, isLoading }) => {
+const AnimeEpisodes = ({ anime, isLoading, episodeId }) => {
     // Helper function to chunk the episodes array
     const chunkArray = (array, size) => {
         const chunks = [];
@@ -16,8 +16,21 @@ const AnimeEpisodes = ({ anime, isLoading }) => {
         ? null
         : chunkArray(anime.episodes || [], 100);
 
-    // Initialize the first group (index 0) as expanded
-    const [expandedGroup, setExpandedGroup] = useState(0);
+    // Automatically expand the group containing the episodeId
+    const getInitialExpandedGroup = () => {
+        if (!groupedEpisodes || !episodeId) return null;
+
+        for (let i = 0; i < groupedEpisodes.length; i++) {
+            if (
+                groupedEpisodes[i].some((episode) => episode.id === episodeId)
+            ) {
+                return i;
+            }
+        }
+        return null;
+    };
+
+    const [expandedGroup, setExpandedGroup] = useState(getInitialExpandedGroup);
 
     const toggleGroup = (groupIndex) => {
         setExpandedGroup((prevGroup) =>
@@ -28,6 +41,12 @@ const AnimeEpisodes = ({ anime, isLoading }) => {
     const onSelectedAnimeEpisode = (episodeId) => {
         router.visit("/anime/" + anime.id + "?episodeId=" + episodeId);
     };
+
+    useEffect(() => {
+        // Auto-expand the group containing the selected episode on component mount
+        const initialGroup = getInitialExpandedGroup();
+        if (initialGroup !== null) setExpandedGroup(initialGroup);
+    }, [groupedEpisodes, episodeId]);
 
     return (
         <div>
@@ -67,7 +86,12 @@ const AnimeEpisodes = ({ anime, isLoading }) => {
                                                 )
                                             }
                                             key={episode.id}
-                                            className="btn btn-sm bg-slate-400 rounded-md w-full text-xs"
+                                            disabled={episode.id === episodeId}
+                                            className={`btn btn-sm rounded-md w-full text-xs ${
+                                                episode.id === episodeId
+                                                    ? "bg-gray-500 text-white cursor-not-allowed"
+                                                    : "bg-slate-400"
+                                            }`}
                                         >
                                             {episode.number}
                                         </button>

@@ -46,17 +46,20 @@ const Anime = ({ animeId }) => {
             ) : (
                 <div className="grid grid-cols-5 gap-5">
                     <div className="col-span-4">
-                        {episodeId ? (
-                            <AnimeIframePlayer episodeId={episodeId} />
-                        ) : (
-                            <AnimeIframePlayer anime={anime} />
-                        )}
+                        <div className="mb-4 px-10">
+                            {episodeId ? (
+                                <AnimeIframePlayer episodeId={episodeId} />
+                            ) : (
+                                <AnimeIframePlayer anime={anime} />
+                            )}
+                        </div>
+
                         <AnimeBigDetails anime={anime} />
                         <div className="divider"></div>
                         <AnimeCharacters anime={anime} />
                     </div>
                     <div className="col-span-1">
-                        <AnimeEpisodes anime={anime} />
+                        <AnimeEpisodes anime={anime} episodeId={episodeId} />
                     </div>
                 </div>
             )}

@@ -18,7 +18,7 @@ const AnimeIframePlayer = ({ anime, episodeId }) => {
     });
 
     return (
-        <div style={{ position: "relative", width: "100%", height: "650px" }}>
+        <div style={{ position: "relative", width: "100%" }}>
             {episodeId ? (
                 <>
                     {isLoading ? (
@@ -28,7 +28,7 @@ const AnimeIframePlayer = ({ anime, episodeId }) => {
                                 top: 0,
                                 left: 0,
                                 width: "100%",
-                                height: "650px",
+                                height: "600px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
@@ -42,8 +42,7 @@ const AnimeIframePlayer = ({ anime, episodeId }) => {
                         <Iframe
                             url={data.headers.Referer}
                             width="100%"
-                            height="650px"
-                            className="mb-4"
+                            height="600px"
                             allowFullScreen
                             allow="autoplay"
                             position="relative"
@@ -51,17 +50,22 @@ const AnimeIframePlayer = ({ anime, episodeId }) => {
                     )}
                 </>
             ) : (
-                <Iframe
-                    url={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1`}
-                    width="100%"
-                    height="650px"
-                    allowFullScreen
-                    allow="autoplay"
-                    className="mb-4"
-                    title={`${
-                        anime.title.english || anime.title.userPreferred
-                    } Trailer`}
-                />
+                <>
+                    {anime.trailer && anime.trailer.id ? (
+                        <Iframe
+                            url={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1`}
+                            width="100%"
+                            height="600px"
+                            allowFullScreen
+                            allow="autoplay"
+                            title={`${
+                                anime.title.english || anime.title.userPreferred
+                            } Trailer`}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </>
             )}
         </div>
     );

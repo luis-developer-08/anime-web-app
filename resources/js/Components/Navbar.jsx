@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <div className="navbar bg-slate-600 items-center shadow-md sticky top-0 px-16 z-10">
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl text-white">
+                <a className="btn btn-ghost text-xl text-white" href="/">
                     Free Anime Online Watch
                 </a>
             </div>
