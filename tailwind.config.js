@@ -19,4 +19,8 @@ export default {
     },
 
     plugins: [forms, require("daisyui")],
+
+    daisyui: {
+        themes: false, // Disables DaisyUI themes completely
+    },
 };

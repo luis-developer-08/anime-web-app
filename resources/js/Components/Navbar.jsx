@@ -68,9 +68,12 @@ const Navbar = () => {
     return (
         <div className="navbar bg-slate-600/90 items-center shadow-md sticky top-0 px-16 z-50">
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl text-white" href="/">
+                <button
+                    className="btn btn-ghost text-xl text-white"
+                    onClick={() => router.visit("/")}
+                >
                     Free Anime Online Watch
-                </a>
+                </button>
             </div>
 
             {/* Random Anime*/}
