@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 
 const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
@@ -23,6 +24,10 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
             window.removeEventListener("scroll", checkPosition);
         };
     }, []);
+
+    const onSelectedAnime = (animeId) => {
+        router.visit("/anime/" + animeId);
+    };
 
     return (
         <div
@@ -66,12 +71,25 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
                 }}
             />
 
-            <p className="text-sm mt-2">
-                <strong>Episodes:</strong> {anime.totalEpisodes}
-            </p>
-            <p className="text-sm">
-                <strong>Status:</strong> {anime.status}
-            </p>
+            <div className="flex justify-between items-center">
+                <div>
+                    <p className="text-sm mt-2">
+                        <strong>Episodes:</strong> {anime.totalEpisodes}
+                    </p>
+                    <p className="text-sm">
+                        <strong>Status:</strong> {anime.status}
+                    </p>
+                </div>
+
+                <div>
+                    <button
+                        className="btn btn-sm bg-slate-300"
+                        onClick={() => onSelectedAnime(anime.id)}
+                    >
+                        Watch
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };

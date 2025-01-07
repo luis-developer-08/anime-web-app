@@ -43,20 +43,20 @@ const NextAiringEpisode = ({ nextAiringEpisode }) => {
     }, [countdown, nextAiringEpisode?.timeUntilAiring]);
 
     return (
-        <div className="bg-white shadow-md rounded-lg p-4 mb-4">
-            <h3 className="text-lg font-semibold text-center text-gray-800">
+        <div className="bg-white shadow-md rounded-lg p-4 mb-10">
+            <h3 className="font-semibold text-center text-gray-800 text-sm">
                 Next Episode
             </h3>
             <div className="mt-2">
-                <p className="text-sm text-gray-600">
+                <p className="text-gray-600 text-xs">
                     <strong>Episode: </strong>
                     {nextAiringEpisode?.episode}
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-gray-600 text-xs">
                     <strong>Airing Time: </strong>
                     {formatTime(nextAiringEpisode?.airingTime)}
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-gray-600 text-xs">
                     <strong>Time Until Airing: </strong>
                     {countdown !== null
                         ? calculateTimeUntilAiring(countdown)
