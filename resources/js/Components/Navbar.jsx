@@ -65,7 +65,11 @@ const Navbar = () => {
             </div>
             {/* Genre*/}
             <div className="dropdown dropdown-hover dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-sm m-1">
+                <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin"
+                >
                     Genre
                 </div>
                 <ul
@@ -93,7 +97,7 @@ const Navbar = () => {
                         type="submit"
                         className="btn bg-slate-400 ml-2 join-item btn-sm border-none"
                     >
-                        <GrSearch />
+                        <GrSearch className="text-gray-200" />
                     </button>
                 </div>
 
