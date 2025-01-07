@@ -56,6 +56,15 @@ const Navbar = () => {
         router.visit("/anime/" + animeId); // Navigate to the anime page
     };
 
+    const onClickRandomAnime = async () => {
+        const { data } = await axios.get(
+            "https://anime-host-api.vercel.app/meta/anilist/random-anime"
+        );
+
+        router.visit("/anime/" + data.id);
+        // return data;
+    };
+
     return (
         <div className="navbar bg-slate-600/90 items-center shadow-md sticky top-0 px-16 z-50">
             <div className="flex-1">
@@ -63,6 +72,17 @@ const Navbar = () => {
                     Free Anime Online Watch
                 </a>
             </div>
+
+            {/* Random Anime*/}
+            <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin"
+                onClick={() => onClickRandomAnime()}
+            >
+                Random Anime
+            </div>
+
             {/* Genre*/}
             <div className="dropdown dropdown-hover dropdown-end">
                 <div
@@ -79,85 +99,93 @@ const Navbar = () => {
                     <GenreSelection />
                 </ul>
             </div>
-
-            {/* Search bar */}
-            <form
-                onSubmit={handleSearchSubmit}
-                className="flex items-center relative"
-            >
-                <div className="join">
-                    <input
-                        type="text"
-                        className="input input-bordered text-black join-item input-sm"
-                        placeholder="Search anime..."
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                    />
-                    <button
-                        type="submit"
-                        className="btn bg-slate-400 ml-2 join-item btn-sm border-none"
-                    >
-                        <GrSearch className="text-gray-200" />
-                    </button>
-                </div>
-
-                {/* Dropdown for search results */}
-                <div
-                    className={`dropdown dropdown-end ${
-                        dropdownOpen && results.length > 0 && !loading
-                            ? "dropdown-open"
-                            : ""
-                    }`}
+            <div>
+                {/* Search bar */}
+                <form
+                    onSubmit={handleSearchSubmit}
+                    className="flex items-center relative"
                 >
-                    {dropdownOpen && results.length > 0 && !loading ? (
-                        <ul
-                            tabIndex={0}
-                            className="dropdown-content rounded-md z-[1] w-[30vw] px-4 max-h-60 mt-6 pt-10 space-y-3 overflow-y-auto shadow-lg shadow-black/80 bg-slate-200"
+                    <div className="join">
+                        <input
+                            type="text"
+                            className="input input-bordered text-black join-item input-sm"
+                            placeholder="Search anime..."
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                        />
+                        <button
+                            type="submit"
+                            className="btn bg-slate-400 ml-2 join-item btn-sm border-none"
                         >
-                            {loading ? (
-                                <li className="p-2">Loading...</li>
-                            ) : searchQuery && results.length > 0 ? (
-                                results.map((anime) => (
-                                    <li key={anime.id}>
-                                        <div
-                                            onClick={() =>
-                                                onSelectedAnime(anime.id)
-                                            }
-                                            className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
-                                        >
-                                            <img
-                                                src={anime.image}
-                                                alt={anime.title.userPreferred}
-                                                className="h-full w-16 object-cover bg-white mr-4 rounded-s-md"
-                                            />
-                                            <div>
-                                                <h2 className="font-bold text-xs">
-                                                    {anime.title.userPreferred}
-                                                </h2>
-                                                <p className="text-xs font-extralight text-gray-500">
-                                                    {anime.status}
-                                                </p>
-                                                <p className="text-xs font-extralight">
-                                                    Episodes: {anime.episodes}
-                                                </p>
-                                                <p className="text-xs font-extralight">
-                                                    Rating: {anime.rating}%
-                                                </p>
+                            <GrSearch className="text-gray-200" />
+                        </button>
+                    </div>
+
+                    {/* Dropdown for search results */}
+                    <div
+                        className={`dropdown dropdown-end ${
+                            dropdownOpen && results.length > 0 && !loading
+                                ? "dropdown-open"
+                                : ""
+                        }`}
+                    >
+                        {dropdownOpen && results.length > 0 && !loading ? (
+                            <ul
+                                tabIndex={0}
+                                className="dropdown-content rounded-md z-[1] w-[30vw] px-4 max-h-60 mt-6 pt-10 space-y-3 overflow-y-auto shadow-lg shadow-black/80 bg-slate-200"
+                            >
+                                {loading ? (
+                                    <li className="p-2">Loading...</li>
+                                ) : searchQuery && results.length > 0 ? (
+                                    results.map((anime) => (
+                                        <li key={anime.id}>
+                                            <div
+                                                onClick={() =>
+                                                    onSelectedAnime(anime.id)
+                                                }
+                                                className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
+                                            >
+                                                <img
+                                                    src={anime.image}
+                                                    alt={
+                                                        anime.title
+                                                            .userPreferred
+                                                    }
+                                                    className="h-full w-16 object-cover bg-white mr-4 rounded-s-md"
+                                                />
+                                                <div>
+                                                    <h2 className="font-bold text-xs">
+                                                        {
+                                                            anime.title
+                                                                .userPreferred
+                                                        }
+                                                    </h2>
+                                                    <p className="text-xs font-extralight text-gray-500">
+                                                        {anime.status}
+                                                    </p>
+                                                    <p className="text-xs font-extralight">
+                                                        Episodes:{" "}
+                                                        {anime.episodes}
+                                                    </p>
+                                                    <p className="text-xs font-extralight">
+                                                        Rating: {anime.rating}%
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li className="p-2 mb-10 text-center">
+                                        No results found
                                     </li>
-                                ))
-                            ) : (
-                                <li className="p-2 mb-10 text-center">
-                                    No results found
-                                </li>
-                            )}
-                        </ul>
-                    ) : (
-                        <></>
-                    )}
-                </div>
-            </form>
+                                )}
+                            </ul>
+                        ) : (
+                            <></>
+                        )}
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
