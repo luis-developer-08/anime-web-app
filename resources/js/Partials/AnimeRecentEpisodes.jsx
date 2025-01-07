@@ -16,8 +16,6 @@ const AnimeRecentEpisodes = () => {
         queryKey: ["fetchAnimeRecentEpisodes"],
     });
 
-    console.log(anime);
-
     const onSelectedAnime = (animeId) => {
         router.visit("/anime/" + animeId);
     };

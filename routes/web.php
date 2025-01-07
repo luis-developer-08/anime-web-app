@@ -30,6 +30,10 @@ Route::get('/anime/genre/{genre}', function ($genre) {
     return Inertia::render('Genre', ['genreId' => $genre]);
 });
 
+Route::get('/manga/{mangaId}', function ($mangaId) {
+    return Inertia::render('Manga', ['mangaId' => $mangaId]);
+});
+
 Route::get('/anime/{animeId}', function ($animeId) {
     return Inertia::render('Anime', ['animeId' => $animeId]);
 });

@@ -7,53 +7,65 @@ import GenreSelection from "./GenreSelection";
 
 const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [results, setResults] = useState([]); // Ensure results is an array
+    const [animeResults, setAnimeResults] = useState([]);
+    const [mangaResults, setMangaResults] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [dropdownOpen, setDropdownOpen] = useState(false); // Controls the dropdown visibility
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     // Function to fetch anime based on search query
     const fetchAnimeQuery = async (query) => {
-        setLoading(true);
         try {
             const { data } = await axios.get(
-                "https://anime-host-api.vercel.app/meta/anilist/" + query
+                `https://anime-host-api.vercel.app/meta/anilist/${query}`
             );
-            setResults(data.results || []); // Ensure data.results is an array
+            setAnimeResults(data.results || []);
         } catch (error) {
-            console.error("Error fetching data:", error);
-            setResults([]); // Set an empty array if there's an error
+            console.error("Error fetching anime data:", error);
+            setAnimeResults([]);
         }
-        setLoading(false);
     };
 
-    // Debounced version of the fetchAnimeQuery function
+    const fetchMangaQuery = async (query) => {
+        try {
+            const { data } = await axios.get(
+                `https://anime-host-api.vercel.app/manga/mangadex/${query}`
+            );
+            setMangaResults(data.results || []);
+        } catch (error) {
+            console.error("Error fetching manga data:", error);
+            setMangaResults([]);
+        }
+    };
+
     const debouncedFetch = useCallback(
         debounce((query) => {
+            setLoading(true);
             fetchAnimeQuery(query);
-        }, 500), // Debounce delay (500ms)
+            fetchMangaQuery(query);
+            setLoading(false);
+        }, 500),
         []
     );
 
-    // Handler for search input change
     const handleSearchChange = (e) => {
         const query = e.target.value;
         setSearchQuery(query);
-        setDropdownOpen(query.length > 0); // Open dropdown when there's a search query
-        debouncedFetch(query); // Call debounced function
+        setDropdownOpen(query.length > 0);
+        debouncedFetch(query);
     };
 
-    // Handle form submission (optional if you want to prevent page reload)
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         fetchAnimeQuery(searchQuery);
+        fetchMangaQuery(searchQuery);
     };
-
     // Handle selection of an anime item
-    const onSelectedAnime = (animeId) => {
-        setSearchQuery(""); // Clear the search query
-        setResults([]); // Clear the results
-        setDropdownOpen(false); // Close the dropdown
-        router.visit("/anime/" + animeId); // Navigate to the anime page
+    const onSelectedItem = (id, type) => {
+        setSearchQuery("");
+        setAnimeResults([]);
+        setMangaResults([]);
+        setDropdownOpen(false);
+        router.visit(`/${type}/${id}`);
     };
 
     const onClickRandomAnime = async () => {
@@ -78,7 +90,6 @@ const Navbar = () => {
 
             {/* Random Anime*/}
             <div
-                tabIndex={0}
                 role="button"
                 className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin"
                 onClick={() => onClickRandomAnime()}
@@ -89,7 +100,6 @@ const Navbar = () => {
             {/* Genre*/}
             <div className="dropdown dropdown-hover dropdown-end">
                 <div
-                    tabIndex={0}
                     role="button"
                     className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin"
                 >
@@ -112,7 +122,7 @@ const Navbar = () => {
                         <input
                             type="text"
                             className="input input-bordered text-black join-item input-sm"
-                            placeholder="Search anime..."
+                            placeholder="Search anime/manga..."
                             value={searchQuery}
                             onChange={handleSearchChange}
                         />
@@ -127,65 +137,108 @@ const Navbar = () => {
                     {/* Dropdown for search results */}
                     <div
                         className={`dropdown dropdown-end ${
-                            dropdownOpen && results.length > 0 && !loading
+                            dropdownOpen &&
+                            !loading &&
+                            (animeResults.length || mangaResults.length)
                                 ? "dropdown-open"
                                 : ""
                         }`}
                     >
-                        {dropdownOpen && results.length > 0 && !loading ? (
-                            <ul
-                                tabIndex={0}
-                                className="dropdown-content rounded-md z-[1] w-[30vw] px-4 max-h-60 mt-6 pt-10 space-y-3 overflow-y-auto shadow-lg shadow-black/80 bg-slate-200"
-                            >
-                                {loading ? (
-                                    <li className="p-2">Loading...</li>
-                                ) : searchQuery && results.length > 0 ? (
-                                    results.map((anime) => (
-                                        <li key={anime.id}>
-                                            <div
-                                                onClick={() =>
-                                                    onSelectedAnime(anime.id)
-                                                }
-                                                className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
-                                            >
-                                                <img
-                                                    src={anime.image}
-                                                    alt={
-                                                        anime.title
-                                                            .userPreferred
+                        {dropdownOpen &&
+                        !loading &&
+                        (animeResults.length || mangaResults.length) ? (
+                            <div className="dropdown-content rounded-md z-[1] w-[50vw] mt-6 shadow-lg shadow-black/80 bg-slate-200">
+                                <div className="grid grid-cols-2 gap-4 bg-slate-500 rounded-t-md py-2 text-gray-200 shadow-lg">
+                                    <div className="text-center">Manga</div>
+                                    <div className="text-center">Anime</div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4 overflow-y-auto h-[40vh] px-4 pt-10">
+                                    <div>
+                                        {mangaResults.length > 0 ? (
+                                            mangaResults.map((manga) => (
+                                                <div
+                                                    key={manga.id}
+                                                    onClick={() =>
+                                                        onSelectedItem(
+                                                            manga.id,
+                                                            "manga"
+                                                        )
                                                     }
-                                                    className="h-full w-16 object-cover bg-white mr-4 rounded-s-md"
-                                                />
-                                                <div>
-                                                    <h2 className="font-bold text-xs">
-                                                        {
+                                                    className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
+                                                >
+                                                    <img
+                                                        src={manga.image}
+                                                        alt={manga.title}
+                                                        className="h-full w-16 object-cover bg-white mr-4 rounded-s-md"
+                                                    />
+                                                    <div>
+                                                        <h2 className="font-bold text-xs">
+                                                            {manga.title}
+                                                        </h2>
+                                                        <p className="text-xs font-extralight">
+                                                            Chapters:{" "}
+                                                            {manga.chapters}
+                                                        </p>
+                                                        <p className="text-xs font-extralight">
+                                                            Status:{" "}
+                                                            {manga.status}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No manga found</p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        {animeResults.length > 0 ? (
+                                            animeResults.map((anime) => (
+                                                <div
+                                                    key={anime.id}
+                                                    onClick={() =>
+                                                        onSelectedItem(
+                                                            anime.id,
+                                                            "anime"
+                                                        )
+                                                    }
+                                                    className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
+                                                >
+                                                    <img
+                                                        src={anime.image}
+                                                        alt={
                                                             anime.title
                                                                 .userPreferred
                                                         }
-                                                    </h2>
-                                                    <p className="text-xs font-extralight text-gray-500">
-                                                        {anime.status}
-                                                    </p>
-                                                    <p className="text-xs font-extralight">
-                                                        Episodes:{" "}
-                                                        {anime.episodes}
-                                                    </p>
-                                                    <p className="text-xs font-extralight">
-                                                        Rating: {anime.rating}%
-                                                    </p>
+                                                        className="h-full w-16 object-cover bg-white mr-4 rounded-s-md"
+                                                    />
+                                                    <div>
+                                                        <h2 className="font-bold text-xs">
+                                                            {
+                                                                anime.title
+                                                                    .userPreferred
+                                                            }
+                                                        </h2>
+                                                        <p className="text-xs font-extralight text-gray-500">
+                                                            {anime.status}
+                                                        </p>
+                                                        <p className="text-xs font-extralight">
+                                                            Episodes:{" "}
+                                                            {anime.episodes}
+                                                        </p>
+                                                        <p className="text-xs font-extralight">
+                                                            Rating:{" "}
+                                                            {anime.rating}%
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    ))
-                                ) : (
-                                    <li className="p-2 mb-10 text-center">
-                                        No results found
-                                    </li>
-                                )}
-                            </ul>
-                        ) : (
-                            <></>
-                        )}
+                                            ))
+                                        ) : (
+                                            <p>No anime found</p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : null}
                     </div>
                 </form>
             </div>
