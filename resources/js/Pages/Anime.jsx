@@ -4,6 +4,7 @@ import AnimeCharacters from "@/Partials/AnimeCharacters";
 import AnimeEpisodes from "@/Partials/AnimeEpisodes";
 import AnimeIframePlayer from "@/Partials/AnimeIframePlayer";
 import AnimeReccomendations from "@/Partials/AnimeReccomendations";
+import AnimeRecentEpisodes from "@/Partials/AnimeRecentEpisodes";
 import AnimeRelated from "@/Partials/AnimeRelated";
 import { Head } from "@inertiajs/react";
 import { useQuery } from "@tanstack/react-query";
@@ -87,6 +88,7 @@ const Anime = ({ animeId }) => {
                         <AnimeEpisodes anime={anime} episodeId={episodeId} />
                         <AnimeReccomendations anime={anime} />
                         <AnimeRelated anime={anime} />
+                        <AnimeRecentEpisodes />
                     </div>
                 </div>
             )}

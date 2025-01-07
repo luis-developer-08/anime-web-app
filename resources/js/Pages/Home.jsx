@@ -1,5 +1,7 @@
 import AnimeAiringSchedule from "@/Partials/AnimeAiringSchedule";
+import AnimeRecentEpisodes from "@/Partials/AnimeRecentEpisodes";
 import FlexAnime from "@/Partials/FlexAnime";
+import NewsFeeds from "@/Partials/NewsFeeds";
 import { Head } from "@inertiajs/react";
 import React from "react";
 
@@ -7,11 +9,18 @@ const Home = () => {
     return (
         <div>
             <Head title="Home" />
-            {/* <h1 className="font-bold text-2xl">Anime</h1> */}
+
             <FlexAnime category={"trending"} />
             <FlexAnime category={"popular"} />
             <FlexAnime category={"airing-schedule"} />
-            {/* <AnimeAiringSchedule /> */}
+            <div className="divider"></div>
+
+            <div className="grid grid-cols-5">
+                <div className="col-span-4">
+                    <NewsFeeds />
+                </div>
+                <AnimeRecentEpisodes />
+            </div>
         </div>
     );
 };
