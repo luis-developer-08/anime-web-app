@@ -48,7 +48,7 @@ const AnimeHero = () => {
                         {anime.trailer && anime.trailer.site === "youtube" ? (
                             <iframe
                                 className="absolute inset-0 w-full h-full object-cover z-0"
-                                src={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1&mute=1&loop=1&playlist=${anime.trailer.id}`}
+                                src={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1&mute=1&loop=1&playlist=${anime.trailer.id}&controls=0&modestbranding=1&rel=0&showinfo=0`}
                                 title={anime.title.romaji}
                                 frameBorder="0"
                                 allow="autoplay; fullscreen"
@@ -71,7 +71,7 @@ const AnimeHero = () => {
                                     className="h-80 object-cover z-0 rounded-md shadow-xl shadow-white"
                                 />
                                 <div className="text-right ps-20 ">
-                                    <h1 className="text-3xl font-bold mb-4">
+                                    <h1 className="text-4xl font-bold mb-7">
                                         {anime.title.english ||
                                             anime.title.romaji}
                                     </h1>

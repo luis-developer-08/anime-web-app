@@ -1,6 +1,7 @@
 import NextAiringEpisode from "@/Components/NextAiringEpisode";
 import AnimeBigDetails from "@/Partials/AnimeBigDetails";
 import AnimeCharacters from "@/Partials/AnimeCharacters";
+import AnimeComment from "@/Partials/AnimeComment";
 import AnimeEpisodes from "@/Partials/AnimeEpisodes";
 import AnimeIframePlayer from "@/Partials/AnimeIframePlayer";
 import AnimeReccomendations from "@/Partials/AnimeReccomendations";
@@ -73,6 +74,8 @@ const Anime = ({ animeId }) => {
                                     <AnimeIframePlayer anime={anime} />
                                 )}
                             </div>
+                            <div className="divider"></div>
+                            <AnimeComment />
                             <div className="divider"></div>
                             <AnimeBigDetails anime={anime} />
                             <div className="divider"></div>
