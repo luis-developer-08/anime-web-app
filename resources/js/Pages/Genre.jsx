@@ -1,4 +1,6 @@
+import AnimeRecentEpisodes from "@/Partials/AnimeRecentEpisodes";
 import FlexAnimeGenre from "@/Partials/FlexAnimeGenre";
+import NewsFeeds from "@/Partials/NewsFeeds";
 import { Head } from "@inertiajs/react";
 import React from "react";
 

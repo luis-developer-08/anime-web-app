@@ -88,7 +88,6 @@ const Anime = ({ animeId }) => {
                         <AnimeEpisodes anime={anime} episodeId={episodeId} />
                         <AnimeReccomendations anime={anime} />
                         <AnimeRelated anime={anime} />
-                        <AnimeRecentEpisodes />
                     </div>
                 </div>
             )}

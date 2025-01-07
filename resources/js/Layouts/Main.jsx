@@ -1,5 +1,7 @@
 import Footer from "@/Components/Footer";
 import Navbar from "@/Components/Navbar";
+import AnimeRecentEpisodes from "@/Partials/AnimeRecentEpisodes";
+import NewsFeeds from "@/Partials/NewsFeeds";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 
@@ -41,7 +43,17 @@ const Main = ({ children }) => {
                 <Navbar />
                 <main className="flex-1 py-5 px-20 bg-slate-200">
                     {isOnline ? (
-                        children
+                        <>
+                            {children}
+                            <div className="divider"></div>
+
+                            <div className="grid grid-cols-5 gap-10">
+                                <div className="col-span-4">
+                                    <NewsFeeds />
+                                </div>
+                                <AnimeRecentEpisodes />
+                            </div>
+                        </>
                     ) : (
                         <div role="alert" className="alert alert-error">
                             <svg

@@ -62,13 +62,8 @@ const AnimeRecentEpisodes = () => {
                                     {relatedAnime.status || "Status Unknown"}
                                 </p>
                                 <p className="text-xs font-extralight">
-                                    Episodes: {relatedAnime.episodes ?? "N/A"}
-                                </p>
-                                <p className="text-xs font-extralight">
-                                    Rating:{" "}
-                                    {relatedAnime.rating
-                                        ? `${relatedAnime.rating}%`
-                                        : "N/A"}
+                                    Episode:{" "}
+                                    {relatedAnime.episodeNumber ?? "N/A"}
                                 </p>
                             </div>
                         </div>

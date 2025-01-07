@@ -13,14 +13,6 @@ const Home = () => {
             <FlexAnime category={"trending"} />
             <FlexAnime category={"popular"} />
             <FlexAnime category={"airing-schedule"} />
-            <div className="divider"></div>
-
-            <div className="grid grid-cols-5">
-                <div className="col-span-4">
-                    <NewsFeeds />
-                </div>
-                <AnimeRecentEpisodes />
-            </div>
         </div>
     );
 };
