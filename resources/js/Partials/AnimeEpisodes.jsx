@@ -107,7 +107,7 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
                         {Array.from({ length: 12 }).map((_, index) => (
                             <div
                                 key={index}
-                                className="w-16 h-8 rounded-md skeleton"
+                                className="w-16 h-8 rounded-md skeleton bg-slate-300"
                             ></div>
                         ))}
                     </div>

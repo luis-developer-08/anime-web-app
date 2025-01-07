@@ -8,15 +8,24 @@ const AnimeBigDetails = ({ anime, isLoading }) => {
             {isLoading ? (
                 <>
                     <div className="col-span-1">
-                        <div className="w-full h-[50vh] rounded-md skeleton"></div>
+                        <div className="w-full h-[50vh] rounded-md skeleton bg-slate-300"></div>
                     </div>
 
                     <div className="col-span-4">
-                        <div className="h-8 w-1/2 mx-auto rounded-md skeleton"></div>
-                        <div className="mt-5 space-y-4">
-                            <div className="h-4 w-full rounded-md skeleton"></div>
-                            <div className="h-4 w-5/6 rounded-md skeleton"></div>
-                            <div className="h-4 w-3/4 rounded-md skeleton"></div>
+                        <div className="h-8 w-1/2 mx-auto rounded-md skeleton bg-slate-300"></div>
+                        <div className="mt-5">
+                            <div className="h-4 w-full rounded-md skeleton bg-slate-300 mt-2"></div>
+                            <div className="h-4 w-5/6 rounded-md skeleton bg-slate-300 mt-2"></div>
+                            <div className="h-4 w-5/6 rounded-md skeleton bg-slate-300 mt-2"></div>
+                            <div className="h-4 w-5/6 rounded-md skeleton bg-slate-300 mt-2"></div>
+                            <div className="h-4 w-3/4 rounded-md skeleton bg-slate-300 mt-2"></div>
+                            <div className="flex justify-between mt-10">
+                                <div className="h-4 w-1/4 rounded-md skeleton bg-slate-300"></div>
+                                <div className="h-4 w-1/4 rounded-md skeleton bg-slate-300"></div>
+                            </div>
+
+                            <div className="h-4 w-1/6 rounded-md skeleton bg-slate-300 mt-10"></div>
+                            <div className="h-4 w-1/6 rounded-md skeleton bg-slate-300 mt-2"></div>
                         </div>
                     </div>
                 </>
@@ -63,15 +72,23 @@ const AnimeBigDetails = ({ anime, isLoading }) => {
                             <div className="p-1 flex gap-1">
                                 <div>Rating:</div>
                                 <div className="flex items-center gap-1">
-                                    {anime.rating}
-                                    <GrStar size={20} />
+                                    {anime.rating ? anime.rating : 0}
+                                    <GrStar
+                                        size={20}
+                                        className="text-yellow-500"
+                                    />
                                 </div>
                             </div>
                             <div className="p-1 flex gap-1">
                                 <div>Popularity:</div>
                                 <div className="flex items-center gap-1">
-                                    {anime.popularity}
-                                    <MdPeopleAlt size={20} />
+                                    {anime.popularity
+                                        ? anime.popularity.toLocaleString()
+                                        : "N/A"}
+                                    <MdPeopleAlt
+                                        size={20}
+                                        className="text-blue-500"
+                                    />
                                 </div>
                             </div>
                         </div>

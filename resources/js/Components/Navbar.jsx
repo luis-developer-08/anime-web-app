@@ -3,6 +3,7 @@ import React, { useState, useCallback } from "react";
 import axios from "axios";
 import { debounce } from "lodash";
 import { router } from "@inertiajs/react";
+import GenreSelection from "./GenreSelection";
 
 const Navbar = () => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -56,12 +57,25 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar bg-slate-600 items-center shadow-md sticky top-0 px-16 z-10">
+        <div className="navbar bg-slate-600/90 items-center shadow-md sticky top-0 px-16 z-50">
             <div className="flex-1">
                 <a className="btn btn-ghost text-xl text-white" href="/">
                     Free Anime Online Watch
                 </a>
             </div>
+            {/* Genre*/}
+            <div className="dropdown dropdown-hover dropdown-end">
+                <div tabIndex={0} role="button" className="btn btn-sm m-1">
+                    Genre
+                </div>
+                <ul
+                    tabIndex={0}
+                    className="dropdown-content menu bg-base-100 rounded-md z-[1] w-[50vw] p-2 shadow"
+                >
+                    <GenreSelection />
+                </ul>
+            </div>
+
             {/* Search bar */}
             <form
                 onSubmit={handleSearchSubmit}

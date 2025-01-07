@@ -13,7 +13,7 @@ const FlexAnimeGenre = ({ genre }) => {
 
     const fetchAnime = async () => {
         const { data } = await axios.get(
-            `https://anime-host-api.vercel.app/anime/gogoanime/genre/${genre}?page=${page}`
+            `https://anime-host-api.vercel.app/meta/anilist/advanced-search?genres=["${genre}"]&page=${page}&perPage=30`
         );
         return data;
     };
@@ -28,7 +28,7 @@ const FlexAnimeGenre = ({ genre }) => {
     };
 
     return (
-        <>
+        <div className="mb-10">
             <div className="flex justify-between items-center gap-5 mt-5 mb-2">
                 <div className="flex items-center gap-5">
                     {isLoading ? (
@@ -101,7 +101,7 @@ const FlexAnimeGenre = ({ genre }) => {
                               <div className="w-full h-full rounded-md shadow-lg shadow-black skeleton" />
                           </div>
                       ))
-                    : data.results.map((anime) => (
+                    : data.results.map((anime, index) => (
                           <div
                               key={anime.id}
                               className="relative h-52 rounded-md cursor-pointer"
@@ -111,20 +111,21 @@ const FlexAnimeGenre = ({ genre }) => {
                               <img
                                   onClick={() => onSelectedAnime(anime.id)}
                                   src={anime.image}
-                                  alt={anime.title}
-                                  className="w-full h-full rounded-md shadow-lg shadow-black hover:scale-105 transition-transform duration-300 ease-out"
+                                  alt={anime.title.userPreferred}
+                                  className="w-full h-full rounded-md shadow-lg shadow-black hover:scale-125 hover:z-10 transition-transform duration-300 ease-out relative"
                               />
                               {hoveredAnime?.id === anime.id && (
                                   <AnimeDetails
                                       anime={anime}
-                                      hoveredAnime={hoveredAnime}
+                                      index={index}
                                       data={data}
+                                      hoveredAnime={hoveredAnime}
                                   />
                               )}
                           </div>
                       ))}
             </div>
-        </>
+        </div>
     );
 };
 

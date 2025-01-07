@@ -18,7 +18,7 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
 
     useEffect(() => {
         window.addEventListener("scroll", checkPosition);
-        checkPosition(); // Check position when the component first mounts
+        checkPosition();
 
         return () => {
             window.removeEventListener("scroll", checkPosition);
@@ -29,19 +29,23 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
         router.visit("/anime/" + animeId);
     };
 
+    const isLeftAligned = [6, 7, 8, 9].includes(index % 10); // Check if last digit is 8, 9, or 0
+
     return (
         <div
             id={`anime-detail-${anime.id}`}
-            className="absolute z-10 bg-slate-800/90 text-white shadow-lg shadow-white rounded-lg p-4 w-[30vw] opacity-0 transition-opacity duration-500 ease-in-out"
+            className="absolute z-10 bg-slate-800/90 text-white shadow-lg shadow-white rounded-lg p-4 w-[30vw] opacity-0 transition-transform duration-500 ease-in-out"
             style={{
-                left: index >= data.results.length - 3 ? "auto" : "100%", // Show card on left for the last 3 items
-                right: index >= data.results.length - 3 ? "100%" : "auto", // Show card on left for the last 3 items
-                top: isNearBottom ? "auto" : "0", // If near the bottom, remove the top positioning
+                left: isLeftAligned ? "auto" : "100%", // Align to the left if the condition matches
+                right: isLeftAligned ? "100%" : "auto", // Align to the right otherwise
+                top: isNearBottom ? "auto" : "0", // If near the bottom, adjust positioning
                 bottom: isNearBottom ? "0" : "auto", // Position at the bottom if near the bottom
                 transform:
-                    index >= data.results.length - 3
-                        ? "none"
-                        : "translateX(10px)", // No transform for the last 3 items
+                    hoveredAnime?.id === anime.id
+                        ? isLeftAligned
+                            ? "translateX(-10px)" // Adjust for left-aligned details
+                            : "translateX(10px) translateY(-10px)" // Move closer to the image
+                        : "translateX(10px)", // Default position
                 opacity: hoveredAnime?.id === anime.id ? 1 : 0, // Fade in/out effect
             }}
         >
@@ -52,7 +56,7 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
             {/* Conditional rendering of iframe based on trailer data */}
             {anime.trailer?.id && (
                 <iframe
-                    src={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1`} // Autoplay and mute on load
+                    src={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1`}
                     width="100%"
                     height="200"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -98,7 +98,7 @@ const FlexAnime = ({ category }) => {
                 {isLoading
                     ? loaders.map((anime) => (
                           <div className="h-52 w-full rounded-md" key={anime}>
-                              <div className="w-full h-full rounded-md shadow-lg shadow-black skeleton" />
+                              <div className="w-full h-full rounded-md shadow-lg shadow-black skeleton bg-slate-400" />
                           </div>
                       ))
                     : data.results.map((anime, index) => (
@@ -112,7 +112,7 @@ const FlexAnime = ({ category }) => {
                                   onClick={() => onSelectedAnime(anime.id)}
                                   src={anime.image}
                                   alt={anime.title.userPreferred}
-                                  className="w-full h-full rounded-md shadow-lg shadow-black hover:scale-105 transition-transform duration-300 ease-out"
+                                  className="w-full h-full rounded-md shadow-lg shadow-black hover:scale-125 transition-transform duration-300 ease-out relative"
                               />
                               {hoveredAnime?.id === anime.id && (
                                   <AnimeDetails
