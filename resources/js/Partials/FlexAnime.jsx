@@ -13,7 +13,7 @@ const FlexAnime = ({ category }) => {
 
     const fetchAnime = async () => {
         const { data } = await axios.get(
-            `https://anime-host-api.vercel.app/meta/anilist/${category}?page=${page}`
+            `https://anime-host-api.vercel.app/meta/anilist/${category}?page=${page}&perPage=10`
         );
         return data;
     };
@@ -28,7 +28,7 @@ const FlexAnime = ({ category }) => {
     };
 
     return (
-        <>
+        <div className="mb-10">
             <div className="flex justify-between items-center gap-5 mt-5 mb-2">
                 <div className="flex items-center gap-5">
                     {isLoading ? (
@@ -112,7 +112,7 @@ const FlexAnime = ({ category }) => {
                                   onClick={() => onSelectedAnime(anime.id)}
                                   src={anime.image}
                                   alt={anime.title.userPreferred}
-                                  className="w-full h-full rounded-md shadow-lg shadow-black hover:scale-125 transition-transform duration-300 ease-out relative"
+                                  className="object-cover w-52 h-full rounded-md shadow-lg shadow-black hover:scale-125 transition-transform duration-300 ease-out relative"
                               />
                               {hoveredAnime?.id === anime.id && (
                                   <AnimeDetails
@@ -125,7 +125,7 @@ const FlexAnime = ({ category }) => {
                           </div>
                       ))}
             </div>
-        </>
+        </div>
     );
 };
 
