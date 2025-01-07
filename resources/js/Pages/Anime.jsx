@@ -43,54 +43,59 @@ const Anime = ({ animeId }) => {
                 />
             )}
 
-            {isLoading ? (
-                <div className="grid grid-cols-5 gap-5">
-                    <div className="col-span-4">
-                        <div className="mb-4 px-10">
-                            <AnimeIframePlayer
-                                isLoadingAnimeIframePlayer={isLoading}
-                            />
+            <div className="px-20">
+                {isLoading ? (
+                    <div className="grid grid-cols-5 gap-5">
+                        <div className="col-span-4">
+                            <div className="mb-4 px-10">
+                                <AnimeIframePlayer
+                                    isLoadingAnimeIframePlayer={isLoading}
+                                />
+                            </div>
+                            <div className="divider"></div>
+                            <AnimeBigDetails isLoading={isLoading} />
+                            <div className="divider"></div>
+                            <AnimeCharacters isLoading={isLoading} />
                         </div>
-                        <div className="divider"></div>
-                        <AnimeBigDetails isLoading={isLoading} />
-                        <div className="divider"></div>
-                        <AnimeCharacters isLoading={isLoading} />
+                        <div className="col-span-1">
+                            <AnimeEpisodes isLoading={isLoading} />
+                            <AnimeReccomendations isLoading={isLoading} />
+                            <AnimeRelated isLoading={isLoading} />
+                        </div>
                     </div>
-                    <div className="col-span-1">
-                        <AnimeEpisodes isLoading={isLoading} />
-                        <AnimeReccomendations isLoading={isLoading} />
-                        <AnimeRelated isLoading={isLoading} />
-                    </div>
-                </div>
-            ) : (
-                <div className="grid grid-cols-5 gap-5">
-                    <div className="col-span-4">
-                        <div className="mb-4 px-10">
-                            {episodeId ? (
-                                <AnimeIframePlayer episodeId={episodeId} />
+                ) : (
+                    <div className="grid grid-cols-5 gap-5">
+                        <div className="col-span-4">
+                            <div className="mb-4 px-10">
+                                {episodeId ? (
+                                    <AnimeIframePlayer episodeId={episodeId} />
+                                ) : (
+                                    <AnimeIframePlayer anime={anime} />
+                                )}
+                            </div>
+                            <div className="divider"></div>
+                            <AnimeBigDetails anime={anime} />
+                            <div className="divider"></div>
+                            <AnimeCharacters anime={anime} />
+                        </div>
+                        <div className="col-span-1">
+                            {anime.nextAiringEpisode ? (
+                                <NextAiringEpisode
+                                    nextAiringEpisode={anime.nextAiringEpisode}
+                                />
                             ) : (
-                                <AnimeIframePlayer anime={anime} />
+                                <></>
                             )}
-                        </div>
-                        <div className="divider"></div>
-                        <AnimeBigDetails anime={anime} />
-                        <div className="divider"></div>
-                        <AnimeCharacters anime={anime} />
-                    </div>
-                    <div className="col-span-1">
-                        {anime.nextAiringEpisode ? (
-                            <NextAiringEpisode
-                                nextAiringEpisode={anime.nextAiringEpisode}
+                            <AnimeEpisodes
+                                anime={anime}
+                                episodeId={episodeId}
                             />
-                        ) : (
-                            <></>
-                        )}
-                        <AnimeEpisodes anime={anime} episodeId={episodeId} />
-                        <AnimeReccomendations anime={anime} />
-                        <AnimeRelated anime={anime} />
+                            <AnimeReccomendations anime={anime} />
+                            <AnimeRelated anime={anime} />
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };

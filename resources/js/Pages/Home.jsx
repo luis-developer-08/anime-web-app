@@ -1,4 +1,5 @@
 import AnimeAiringSchedule from "@/Partials/AnimeAiringSchedule";
+import AnimeHero from "@/Partials/AnimeHero";
 import AnimeRecentEpisodes from "@/Partials/AnimeRecentEpisodes";
 import FlexAnime from "@/Partials/FlexAnime";
 import NewsFeeds from "@/Partials/NewsFeeds";
@@ -9,10 +10,12 @@ const Home = () => {
     return (
         <div>
             <Head title="Home" />
-
-            <FlexAnime category={"trending"} />
-            <FlexAnime category={"popular"} />
-            <FlexAnime category={"airing-schedule"} />
+            <AnimeHero />
+            <div className="px-20 mt-[100vh]">
+                <FlexAnime category={"trending"} />
+                <FlexAnime category={"popular"} />
+                <FlexAnime category={"airing-schedule"} />
+            </div>
         </div>
     );
 };

@@ -41,17 +41,18 @@ const Main = ({ children }) => {
         <QueryClientProvider client={queryClient}>
             <div className="flex flex-col min-h-screen">
                 <Navbar />
-                <main className="flex-1 py-5 px-20 bg-slate-200">
+                <main className="flex-1 py-5 bg-slate-200">
                     {isOnline ? (
                         <>
                             {children}
                             <div className="divider"></div>
-
-                            <div className="grid grid-cols-5 gap-10">
-                                <div className="col-span-4">
-                                    <NewsFeeds />
+                            <div className="px-20">
+                                <div className="grid grid-cols-5 gap-10">
+                                    <div className="col-span-4">
+                                        <NewsFeeds />
+                                    </div>
+                                    <AnimeRecentEpisodes />
                                 </div>
-                                <AnimeRecentEpisodes />
                             </div>
                         </>
                     ) : (
