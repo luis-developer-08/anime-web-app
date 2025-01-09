@@ -88,8 +88,8 @@ const AnimeIframePlayer = ({
                                     url={data.headers.Referer}
                                     width="100%"
                                     height="600px"
-                                    allowFullScreen
-                                    allow="autoplay"
+                                    // allowFullScreen
+                                    // allow="autoplay"
                                     position="relative"
                                 />
                             )}
@@ -98,7 +98,7 @@ const AnimeIframePlayer = ({
                         <>
                             {anime.trailer && anime.trailer.id ? (
                                 <Iframe
-                                    url={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1&controls=0`}
+                                    url={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1`}
                                     width="100%"
                                     height="600px"
                                     allowFullScreen
