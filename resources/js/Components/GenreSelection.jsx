@@ -1,7 +1,7 @@
 import { router } from "@inertiajs/react";
 import React from "react";
 
-const GenreSelection = () => {
+const GenreSelection = ({ setGenreSelection }) => {
     const genres = [
         "Action",
         "Adventure",
@@ -24,6 +24,7 @@ const GenreSelection = () => {
     ];
 
     const onSelectedGenre = (genre) => {
+        setGenreSelection(false);
         router.visit("/anime/genre/" + genre);
     };
 

@@ -11,6 +11,7 @@ const Navbar = () => {
     const [mangaResults, setMangaResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [genreSelection, setGenreSelection] = useState(false);
 
     // Function to fetch anime based on search query
     const fetchAnimeQuery = async (query) => {
@@ -102,15 +103,21 @@ const Navbar = () => {
                 <div
                     role="button"
                     className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin"
+                    onMouseEnter={() => setGenreSelection(true)}
+                    // onMouseLeave={() => setgenreSelection(false)}
                 >
                     Genre
                 </div>
-                <ul
-                    tabIndex={0}
-                    className="dropdown-content menu bg-base-100 rounded-md z-[1] w-[50vw] p-2 shadow"
-                >
-                    <GenreSelection />
-                </ul>
+                {genreSelection ? (
+                    <ul
+                        tabIndex={0}
+                        className="dropdown-content menu bg-base-100 rounded-md z-[1] w-[50vw] p-2 shadow"
+                    >
+                        <GenreSelection setGenreSelection={setGenreSelection} />
+                    </ul>
+                ) : (
+                    <></>
+                )}
             </div>
             <div>
                 {/* Search bar */}
