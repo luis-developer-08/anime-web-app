@@ -36,7 +36,7 @@ const Manga = ({ mangaId }) => {
                 <></>
             ) : (
                 <Head
-                    title={anime.title.userPreferred || anime.title.english}
+                    title={manga.title.userPreferred || manga.title.english}
                 />
             )}
 
