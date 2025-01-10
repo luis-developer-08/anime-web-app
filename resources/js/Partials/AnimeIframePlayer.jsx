@@ -12,7 +12,8 @@ const AnimeIframePlayer = ({
 
     const fetchAnimeStreamLinks = async () => {
         const { data } = await axios.get(
-            import.meta.env.VITE_API_ANIME_2 + `/gogoanime/watch/${episodeId}`
+            import.meta.env.VITE_API_ANIME_2 +
+                `/anime/gogoanime/watch/${episodeId}`
         );
         return data;
     };
