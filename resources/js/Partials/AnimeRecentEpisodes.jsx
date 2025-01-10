@@ -54,8 +54,8 @@ const AnimeRecentEpisodes = () => {
                             />
                             <div>
                                 <h2 className="font-bold text-xs">
-                                    {relatedAnime.title?.english ||
-                                        "Unknown Title"}
+                                    {relatedAnime.title?.english.slice(0, 20) +
+                                        "..." || "Unknown Title"}
                                 </h2>
                                 <p className="text-xs font-extralight text-gray-500">
                                     {relatedAnime.status || "Status Unknown"}

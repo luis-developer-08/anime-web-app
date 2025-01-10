@@ -41,8 +41,10 @@ const AnimeRelated = ({ anime, isLoading }) => {
                             />
                             <div>
                                 <h2 className="font-bold text-xs">
-                                    {relatedAnime.title?.userPreferred ||
-                                        "Unknown Title"}
+                                    {relatedAnime.title?.userPreferred.slice(
+                                        0,
+                                        20
+                                    ) + "..." || "Unknown Title"}
                                 </h2>
                                 <p className="text-xs font-extralight text-gray-500">
                                     {relatedAnime.status || "Status Unknown"}
