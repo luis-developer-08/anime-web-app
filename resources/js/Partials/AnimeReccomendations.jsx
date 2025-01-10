@@ -42,8 +42,10 @@ const AnimeReccomendations = ({ anime, isLoading }) => {
                             />
                             <div>
                                 <h2 className="font-bold text-xs">
-                                    {recommendedAnime.title?.userPreferred ||
-                                        "Unknown Title"}
+                                    {recommendedAnime.title?.userPreferred.slice(
+                                        0,
+                                        20
+                                    ) + "..." || "Unknown Title"}
                                 </h2>
                                 <p className="text-xs font-extralight text-gray-500">
                                     {recommendedAnime.status ||
