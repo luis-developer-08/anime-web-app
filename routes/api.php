@@ -11,7 +11,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/telescope-requests', function () {
     $requests = DB::table('telescope_entries')
         ->where('type', 'request') // Fetch only request logs
-        ->whereNot('content->uri', 'like', 'api/%') // Exclude 'api/' routes
+        ->whereNot('content->uri', 'like', '%api%') // Exclude 'api/' routes
         ->orderBy('created_at', 'desc')
         ->limit(10) // Fetch the latest 50 requests
         ->get()
