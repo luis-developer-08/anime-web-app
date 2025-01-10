@@ -13,7 +13,7 @@ Route::get('/telescope-requests', function () {
         ->where('type', 'request') // Fetch only request logs
         ->whereNot('content->uri', 'like', '%api%') // Exclude 'api/' routes
         ->orderBy('created_at', 'desc')
-        ->limit(5) // Fetch the latest 50 requests
+        ->limit(6) // Fetch the latest 50 requests
         ->get()
         ->map(function ($entry) {
             $content = json_decode($entry->content, true);
