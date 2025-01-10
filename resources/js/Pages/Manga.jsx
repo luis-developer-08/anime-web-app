@@ -30,22 +30,39 @@ const Manga = ({ mangaId }) => {
     });
 
     return (
-        <div className="px-20">
-            <div className="grid grid-cols-5 gap-5">
-                <div className="col-span-4">
-                    {chapterId ? <MangaReader chapterId={chapterId} /> : <></>}
-                    {isLoading ? (
-                        <MangaBigDetails isLoading={isLoading} />
-                    ) : (
-                        <MangaBigDetails manga={manga} />
-                    )}
-                </div>
-                <div className="col-span-1">
-                    {isLoading ? (
-                        <MangaChapters isLoading={isLoading} />
-                    ) : (
-                        <MangaChapters manga={manga} chapterId={chapterId} />
-                    )}
+        <div>
+            {isLoading ? (
+                <></>
+            ) : (
+                <Head
+                    title={anime.title.userPreferred || anime.title.english}
+                />
+            )}
+
+            <div className="px-20">
+                <div className="grid grid-cols-5 gap-5">
+                    <div className="col-span-4">
+                        {chapterId ? (
+                            <MangaReader chapterId={chapterId} />
+                        ) : (
+                            <></>
+                        )}
+                        {isLoading ? (
+                            <MangaBigDetails isLoading={isLoading} />
+                        ) : (
+                            <MangaBigDetails manga={manga} />
+                        )}
+                    </div>
+                    <div className="col-span-1">
+                        {isLoading ? (
+                            <MangaChapters isLoading={isLoading} />
+                        ) : (
+                            <MangaChapters
+                                manga={manga}
+                                chapterId={chapterId}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

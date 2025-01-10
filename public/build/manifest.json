@@ -1,13 +1,13 @@
 {
-  "_AnimeDetails-Dy_MD37Z.js": {
-    "file": "assets/AnimeDetails-Dy_MD37Z.js",
+  "_AnimeDetails-CNBch-Gy.js": {
+    "file": "assets/AnimeDetails-CNBch-Gy.js",
     "name": "AnimeDetails",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_DramaDetails-CZanR_Qh.js": {
-    "file": "assets/DramaDetails-CZanR_Qh.js",
+  "_DramaDetails-Cfpxdetd.js": {
+    "file": "assets/DramaDetails-Cfpxdetd.js",
     "name": "DramaDetails",
     "imports": [
       "resources/js/app.jsx"
@@ -34,7 +34,7 @@
     "src": "node_modules/slick-carousel/slick/fonts/slick.woff"
   },
   "resources/js/Pages/About.jsx": {
-    "file": "assets/About-DkKrMOnr.js",
+    "file": "assets/About-CIQWYvWI.js",
     "name": "About",
     "src": "resources/js/Pages/About.jsx",
     "isDynamicEntry": true,
@@ -43,7 +43,7 @@
     ]
   },
   "resources/js/Pages/Anime.jsx": {
-    "file": "assets/Anime-Cz1yeEi8.js",
+    "file": "assets/Anime-uNFCTYdf.js",
     "name": "Anime",
     "src": "resources/js/Pages/Anime.jsx",
     "isDynamicEntry": true,
@@ -52,43 +52,43 @@
     ]
   },
   "resources/js/Pages/DramaCool.jsx": {
-    "file": "assets/DramaCool-CZYT0pgG.js",
+    "file": "assets/DramaCool-D008c1NY.js",
     "name": "DramaCool",
     "src": "resources/js/Pages/DramaCool.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_DramaDetails-CZanR_Qh.js"
+      "_DramaDetails-Cfpxdetd.js"
     ]
   },
   "resources/js/Pages/FlixHQ.jsx": {
-    "file": "assets/FlixHQ-D3lcMahe.js",
+    "file": "assets/FlixHQ-lYBk0rzm.js",
     "name": "FlixHQ",
     "src": "resources/js/Pages/FlixHQ.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_DramaDetails-CZanR_Qh.js"
+      "_DramaDetails-Cfpxdetd.js"
     ]
   },
   "resources/js/Pages/Genre.jsx": {
-    "file": "assets/Genre-9pgz-Qrc.js",
+    "file": "assets/Genre-B2ye3bgp.js",
     "name": "Genre",
     "src": "resources/js/Pages/Genre.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AnimeDetails-Dy_MD37Z.js"
+      "_AnimeDetails-CNBch-Gy.js"
     ]
   },
   "resources/js/Pages/Home.jsx": {
-    "file": "assets/Home-CGWYZkDh.js",
+    "file": "assets/Home-C-8HjZlk.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_AnimeDetails-Dy_MD37Z.js"
+      "_AnimeDetails-CNBch-Gy.js"
     ],
     "css": [
       "assets/Home-DkBSsmpK.css"
@@ -102,7 +102,7 @@
     ]
   },
   "resources/js/Pages/Manga.jsx": {
-    "file": "assets/Manga-DyvCsEwS.js",
+    "file": "assets/Manga-BkmV0kLp.js",
     "name": "Manga",
     "src": "resources/js/Pages/Manga.jsx",
     "isDynamicEntry": true,
@@ -111,7 +111,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-BcSBE4Dk.js",
+    "file": "assets/app-DAfWx6cG.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
