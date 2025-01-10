@@ -26,7 +26,7 @@ const MangaReader = ({ chapterId }) => {
                     <span className="loading loading-spinner loading-lg text-white"></span>
                 </div>
             ) : (
-                <div className="flex flex-col h-[100vh] overflow-y-auto mb-10">
+                <div className="flex flex-col h-[90vh] overflow-y-auto mb-10">
                     {data.map((image) => (
                         <img src={image.img} alt="" loading="lazy" />
                     ))}
