@@ -5,7 +5,8 @@ import React from "react";
 const Feeds = ({ topic }) => {
     const fetchNewsFeeds = async () => {
         const { data } = await axios.get(
-            `https://anime-host-api.vercel.app/news/ann/recent-feeds?topic=${topic}`
+            import.meta.env.VITE_API_ANIME_2 +
+                `/news/ann/recent-feeds?topic=${topic}`
         );
         return data;
     };

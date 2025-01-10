@@ -4,7 +4,9 @@ import React from "react";
 const MangaReader = ({ chapterId }) => {
     const fetchMangaImagesRead = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/manga/mangadex/read/" + chapterId
+            import.meta.env.VITE_API_ANIME_2 +
+                "/manga/mangadex/read/" +
+                chapterId
         );
 
         return data;

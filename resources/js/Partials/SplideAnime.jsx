@@ -11,7 +11,8 @@ const SplideAnime = ({ category }) => {
 
     const fetchAnime = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/meta/anilist/" +
+            import.meta.env.VITE_API_ANIME_2 +
+                "/meta/anilist/" +
                 category +
                 "?page=" +
                 page

@@ -24,7 +24,7 @@ const Anime = ({ animeId }) => {
 
     const fetchAnimeInfo = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/meta/anilist/info/" + animeId
+            import.meta.env.VITE_API_ANIME_1 + "/meta/anilist/info/" + animeId
         );
         return data;
     };

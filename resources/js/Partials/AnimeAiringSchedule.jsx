@@ -4,7 +4,7 @@ import React from "react";
 const AnimeAiringSchedule = () => {
     const fetchAnimeAiringSchedule = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/meta/anilist/airing-schedule"
+            import.meta.env.VITE_API_ANIME_1 + "/meta/anilist/airing-schedule"
         );
         return data;
     };

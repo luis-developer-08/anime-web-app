@@ -6,7 +6,8 @@ import React from "react";
 const AnimeRecentEpisodes = () => {
     const fetchAnimeRecentEpisodes = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/meta/anilist/recent-episodes?page=1"
+            import.meta.env.VITE_API_ANIME_1 +
+                "/meta/anilist/recent-episodes?page=1"
         );
         return data;
     };

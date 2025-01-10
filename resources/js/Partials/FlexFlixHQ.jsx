@@ -12,7 +12,8 @@ const FlexFlixHQ = ({ category }) => {
 
     const fetchDrama = async () => {
         const { data } = await axios.get(
-            `https://anime-host-api.vercel.app/movies/dramacool/${category}?page=${page}`
+            import.meta.env.VITE_API_ANIME_2 +
+                `/movies/dramacool/${category}?page=${page}`
         );
         return data;
     };

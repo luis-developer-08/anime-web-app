@@ -18,7 +18,7 @@ const Manga = ({ mangaId }) => {
 
     const fetchMangaInfo = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/manga/mangadex/info/" + mangaId
+            import.meta.env.VITE_API_ANIME_1 + "/manga/mangadex/info/" + mangaId
         );
 
         return data;

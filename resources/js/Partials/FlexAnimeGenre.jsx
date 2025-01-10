@@ -13,7 +13,8 @@ const FlexAnimeGenre = ({ genre }) => {
 
     const fetchAnime = async () => {
         const { data } = await axios.get(
-            `https://anime-host-api.vercel.app/meta/anilist/advanced-search?genres=["${genre}"]&page=${page}&perPage=30`
+            import.meta.env.VITE_API_ANIME_1 +
+                `/meta/anilist/advanced-search?genres=["${genre}"]&page=${page}&perPage=30`
         );
         return data;
     };

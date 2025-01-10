@@ -17,7 +17,7 @@ const Navbar = () => {
     const fetchAnimeQuery = async (query) => {
         try {
             const { data } = await axios.get(
-                `https://anime-host-api.vercel.app/meta/anilist/${query}`
+                import.meta.env.VITE_API_ANIME_1 + `/meta/anilist/${query}`
             );
             setAnimeResults(data.results || []);
         } catch (error) {
@@ -29,7 +29,7 @@ const Navbar = () => {
     const fetchMangaQuery = async (query) => {
         try {
             const { data } = await axios.get(
-                `https://anime-host-api.vercel.app/manga/mangadex/${query}`
+                import.meta.env.VITE_API_ANIME_1 + `/manga/mangadex/${query}`
             );
             setMangaResults(data.results || []);
         } catch (error) {
@@ -71,7 +71,7 @@ const Navbar = () => {
 
     const onClickRandomAnime = async () => {
         const { data } = await axios.get(
-            "https://anime-host-api.vercel.app/meta/anilist/random-anime"
+            import.meta.env.VITE_API_ANIME_1 + "/meta/anilist/random-anime"
         );
 
         router.visit("/anime/" + data.id);
