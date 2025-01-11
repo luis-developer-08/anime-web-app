@@ -57,7 +57,7 @@ const AnimeIframePlayer = ({
                         left: 0,
                         width: "100%",
                         height: isMobile
-                            ? "255px"
+                            ? "260px"
                             : isTablet
                             ? "500px"
                             : "800px",
@@ -81,7 +81,7 @@ const AnimeIframePlayer = ({
                                         left: 0,
                                         width: "100%",
                                         height: isMobile
-                                            ? "255px"
+                                            ? "260px"
                                             : isTablet
                                             ? "500px"
                                             : "800px",
@@ -101,7 +101,7 @@ const AnimeIframePlayer = ({
                                     width="100%"
                                     height={
                                         isMobile
-                                            ? "255px"
+                                            ? "260px"
                                             : isTablet
                                             ? "500px"
                                             : "800px"
@@ -120,7 +120,7 @@ const AnimeIframePlayer = ({
                                     width="100%"
                                     height={
                                         isMobile
-                                            ? "255px"
+                                            ? "260px"
                                             : isTablet
                                             ? "500px"
                                             : "800px"
