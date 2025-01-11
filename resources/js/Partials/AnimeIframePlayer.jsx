@@ -57,14 +57,14 @@ const AnimeIframePlayer = ({
                         left: 0,
                         width: "100%",
                         height: isMobile
-                            ? "200px"
+                            ? "300px"
                             : isTablet
-                            ? "400px"
-                            : "600px",
+                            ? "500px"
+                            : "800px",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        backgroundColor: "rgba(0, 0, 0)",
                         zIndex: 10,
                     }}
                 >
@@ -81,14 +81,14 @@ const AnimeIframePlayer = ({
                                         left: 0,
                                         width: "100%",
                                         height: isMobile
-                                            ? "200px"
+                                            ? "300px"
                                             : isTablet
-                                            ? "400px"
-                                            : "600px",
+                                            ? "500px"
+                                            : "800px",
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                        backgroundColor: "rgba(0, 0, 0)",
                                         zIndex: 10,
                                     }}
                                 >
@@ -101,10 +101,10 @@ const AnimeIframePlayer = ({
                                     width="100%"
                                     height={
                                         isMobile
-                                            ? "200px"
+                                            ? "300px"
                                             : isTablet
-                                            ? "400px"
-                                            : "600px"
+                                            ? "500px"
+                                            : "800px"
                                     }
                                     // allowFullScreen
                                     // allow="autoplay"
@@ -120,10 +120,10 @@ const AnimeIframePlayer = ({
                                     width="100%"
                                     height={
                                         isMobile
-                                            ? "200px"
+                                            ? "300px"
                                             : isTablet
-                                            ? "400px"
-                                            : "600px"
+                                            ? "500px"
+                                            : "800px"
                                     }
                                     allowFullScreen
                                     allow="autoplay"
