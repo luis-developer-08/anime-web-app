@@ -62,7 +62,7 @@ const Anime = ({ animeId }) => {
                             </div>
                             <div
                                 className={`px-3  ${
-                                    isMobile ? "mt-[35vh]" : ""
+                                    isMobile ? "mt-[40vh]" : ""
                                 }`}
                             >
                                 <div className="divider"></div>
@@ -97,7 +97,7 @@ const Anime = ({ animeId }) => {
                             </div>
                             <div
                                 className={`px-3 ${
-                                    isMobile ? "mt-[35vh]" : ""
+                                    isMobile ? "mt-[40vh]" : ""
                                 }`}
                             >
                                 {isMobile ? (
