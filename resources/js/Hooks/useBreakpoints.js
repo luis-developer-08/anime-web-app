@@ -3,9 +3,9 @@ import { useMediaQuery as useResponsiveMediaQuery } from "react-responsive";
 const useBreakpoints = () => {
     const isMobile = useResponsiveMediaQuery({ query: "(max-width: 768px)" });
     const isTablet = useResponsiveMediaQuery({
-        query: "(min-width: 768px) and (max-width: 1024px)",
+        query: "(min-width: 768px) and (max-width: 999px)",
     });
-    const isDesktop = useResponsiveMediaQuery({ query: "(min-width: 1025px)" });
+    const isDesktop = useResponsiveMediaQuery({ query: "(min-width: 1000px)" });
 
     return { isMobile, isTablet, isDesktop };
 };

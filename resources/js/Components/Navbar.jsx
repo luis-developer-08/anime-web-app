@@ -233,7 +233,7 @@ const Navbar = () => {
                     {/* Random Anime*/}
                     <div
                         role="button"
-                        className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin"
+                        className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin rounded-sm"
                         onClick={() => onClickRandomAnime()}
                     >
                         Random Anime
@@ -243,7 +243,7 @@ const Navbar = () => {
                     <div className="dropdown dropdown-hover dropdown-end">
                         <div
                             role="button"
-                            className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin"
+                            className="btn btn-sm m-1 bg-slate-400 border-0 text-gray-200 font-thin rounded-sm"
                             onMouseEnter={() => setGenreSelection(true)}
                             // onMouseLeave={() => setgenreSelection(false)}
                         >
@@ -252,7 +252,7 @@ const Navbar = () => {
                         {genreSelection ? (
                             <ul
                                 tabIndex={0}
-                                className="dropdown-content menu bg-base-100 rounded-md z-[1] w-[50vw] p-2 shadow"
+                                className="dropdown-content menu bg-base-100 rounded-sm z-[1] w-[50vw] p-2 shadow"
                             >
                                 <GenreSelection
                                     setGenreSelection={setGenreSelection}
@@ -271,14 +271,14 @@ const Navbar = () => {
                             <div className="join">
                                 <input
                                     type="text"
-                                    className="input input-bordered text-black join-item input-sm"
+                                    className="input input-bordered text-black join-item input-sm rounded-sm"
                                     placeholder="Search anime/manga..."
                                     value={searchQuery}
                                     onChange={handleSearchChange}
                                 />
                                 <button
                                     type="submit"
-                                    className="btn bg-slate-400 ml-2 join-item btn-sm border-none"
+                                    className="btn bg-slate-400 ml-2 join-item btn-sm border-none rounded-sm"
                                 >
                                     <GrSearch className="text-gray-200" />
                                 </button>
@@ -297,7 +297,7 @@ const Navbar = () => {
                                 {dropdownOpen &&
                                 !loading &&
                                 (animeResults.length || mangaResults.length) ? (
-                                    <div className="dropdown-content rounded-md z-[1] w-[50vw] mt-6 shadow-lg shadow-black/80 bg-slate-200">
+                                    <div className="dropdown-content rounded-sm z-[1] w-[50vw] mt-6 shadow-lg shadow-black/80 bg-slate-200">
                                         <div className="grid grid-cols-2 gap-4 bg-slate-500 rounded-t-md py-2 text-gray-200 shadow-lg">
                                             <div className="text-center">
                                                 Manga
@@ -319,7 +319,7 @@ const Navbar = () => {
                                                                         "manga"
                                                                     )
                                                                 }
-                                                                className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
+                                                                className="flex h-20 items-center rounded-sm bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
                                                             >
                                                                 <img
                                                                     src={
@@ -368,7 +368,7 @@ const Navbar = () => {
                                                                         "anime"
                                                                     )
                                                                 }
-                                                                className="flex h-20 items-center rounded-md bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
+                                                                className="flex h-20 items-center rounded-sm bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
                                                             >
                                                                 <img
                                                                     src={
