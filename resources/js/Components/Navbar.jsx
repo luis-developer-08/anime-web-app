@@ -105,14 +105,14 @@ const Navbar = () => {
                         <div className="join">
                             <input
                                 type="text"
-                                className="input input-bordered text-black join-item input-sm w-28 rounded-sm"
+                                className="input input-bordered text-black join-item input-sm rounded-sm"
                                 placeholder="Search..."
                                 value={searchQuery}
                                 onChange={handleSearchChange}
                             />
                             <button
                                 type="submit"
-                                className="btn bg-slate-400 ml-2 join-item btn-sm border-none rounded-sm"
+                                className="btn bg-slate-800 ml-2 join-item btn-sm border-none rounded-sm"
                             >
                                 <GrSearch className="text-gray-200" />
                             </button>
