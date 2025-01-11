@@ -17,9 +17,9 @@ const Feeds = ({ topic }) => {
     });
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto lg:p-4">
             {isLoading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 lg:gap-10">
                     {Array.from({ length: 8 }).map((_, index) => (
                         <div
                             key={index}
@@ -35,22 +35,22 @@ const Feeds = ({ topic }) => {
                     ))}
                 </div>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 lg:gap-10">
                     {data.map((feed) => (
                         <div
                             key={feed.id}
-                            className="bg-white shadow-md rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105"
+                            className="bg-white shadow-md rounded-sm overflow-hidden transition-transform duration-300 lg:hover:scale-105"
                         >
                             <img
                                 src={feed.thumbnail}
                                 alt={feed.title}
-                                className="w-full h-48 object-cover"
+                                className="w-full h-24 lg:h-48 object-cover"
                             />
-                            <div className="p-4">
-                                <h2 className="text-lg font-bold mb-2">
-                                    {feed.title}
+                            <div className="p-2 lg:p-4">
+                                <h2 className="text-xs lg:text-lg font-bold mb-2">
+                                    {feed.title.slice(0, 10) + "..."}
                                 </h2>
-                                <p className="text-gray-500 text-sm mb-4">
+                                <p className="text-gray-500 text-xs lg:text-sm mb-4">
                                     Uploaded: {feed.uploadedAt}
                                 </p>
                                 <div className="flex flex-wrap gap-2 mb-4">
@@ -67,7 +67,7 @@ const Feeds = ({ topic }) => {
                                     href={feed.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-blue-500 hover:underline"
+                                    className="text-blue-500 hover:underline text-xs lg:text-md"
                                 >
                                     Read More
                                 </a>

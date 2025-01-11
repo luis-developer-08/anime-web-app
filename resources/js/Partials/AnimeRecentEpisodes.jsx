@@ -23,7 +23,7 @@ const AnimeRecentEpisodes = () => {
 
     return (
         <div>
-            <h1 className="text-lg font-bold">Recent episodes</h1>
+            <h1 className="text-xs lg:text-lg font-bold">Recent episodes</h1>
             <div className="mt-4 h-[70vh] overflow-y-auto overflow-x-hidden">
                 {isLoading ? (
                     // Skeleton loader for anime recommendations

@@ -1,3 +1,4 @@
+import useBreakpoints from "@/Hooks/useBreakpoints";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
@@ -8,6 +9,8 @@ const AnimeIframePlayer = ({
     episodeId,
     isLoadingAnimeIframePlayer,
 }) => {
+    const { isMobile, isTablet, isDesktop } = useBreakpoints();
+
     const iframeRef = useRef(null); // Create a ref to the iframe
 
     const fetchAnimeStreamLinks = async () => {
@@ -46,14 +49,18 @@ const AnimeIframePlayer = ({
     }, []);
 
     return (
-        <div style={{ position: "relative", width: "100%" }}>
+        <div style={{ width: "100%" }} className="sticky top-0">
             {isLoadingAnimeIframePlayer ? (
                 <div
                     style={{
                         top: 0,
                         left: 0,
                         width: "100%",
-                        height: "600px",
+                        height: isMobile
+                            ? "200px"
+                            : isTablet
+                            ? "400px"
+                            : "600px",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -61,7 +68,7 @@ const AnimeIframePlayer = ({
                         zIndex: 10,
                     }}
                 >
-                    <span className="loading loading-spinner loading-lg text-white"></span>
+                    <span className="loading loading-spinner loading-lg text-white m-0"></span>
                 </div>
             ) : (
                 <>
@@ -73,7 +80,11 @@ const AnimeIframePlayer = ({
                                         top: 0,
                                         left: 0,
                                         width: "100%",
-                                        height: "600px",
+                                        height: isMobile
+                                            ? "200px"
+                                            : isTablet
+                                            ? "400px"
+                                            : "600px",
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
@@ -88,7 +99,13 @@ const AnimeIframePlayer = ({
                                     ref={iframeRef} // Attach the ref to the iframe
                                     url={data.headers.Referer}
                                     width="100%"
-                                    height="600px"
+                                    height={
+                                        isMobile
+                                            ? "200px"
+                                            : isTablet
+                                            ? "400px"
+                                            : "600px"
+                                    }
                                     // allowFullScreen
                                     // allow="autoplay"
                                     position="relative"
@@ -101,7 +118,13 @@ const AnimeIframePlayer = ({
                                 <Iframe
                                     url={`https://www.youtube.com/embed/${anime.trailer.id}?autoplay=1`}
                                     width="100%"
-                                    height="600px"
+                                    height={
+                                        isMobile
+                                            ? "200px"
+                                            : isTablet
+                                            ? "400px"
+                                            : "600px"
+                                    }
                                     allowFullScreen
                                     allow="autoplay"
                                     title={`${

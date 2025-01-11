@@ -1,4 +1,5 @@
 import NextAiringEpisode from "@/Components/NextAiringEpisode";
+import useBreakpoints from "@/Hooks/useBreakpoints";
 import AnimeBigDetails from "@/Partials/AnimeBigDetails";
 import AnimeCharacters from "@/Partials/AnimeCharacters";
 import AnimeComment from "@/Partials/AnimeComment";
@@ -12,6 +13,8 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 
 const Anime = ({ animeId }) => {
+    const { isMobile, isTablet, isDesktop } = useBreakpoints();
+
     const [episodeId, setEpisodeId] = useState(null);
 
     useEffect(() => {
@@ -44,11 +47,11 @@ const Anime = ({ animeId }) => {
                 />
             )}
 
-            <div className="px-20">
+            <div className="lg:px-20">
                 {isLoading ? (
-                    <div className="grid grid-cols-5 gap-5">
-                        <div className="col-span-4">
-                            <div className="mb-4 px-10">
+                    <div className="grid lg:grid-cols-5 gap-5">
+                        <div className="lg:col-span-4">
+                            <div className="lg:mb-4 px-10">
                                 <AnimeIframePlayer
                                     isLoadingAnimeIframePlayer={isLoading}
                                 />
@@ -58,44 +61,56 @@ const Anime = ({ animeId }) => {
                             <div className="divider"></div>
                             <AnimeCharacters isLoading={isLoading} />
                         </div>
-                        <div className="col-span-1">
-                            <AnimeEpisodes isLoading={isLoading} />
-                            <AnimeReccomendations isLoading={isLoading} />
-                            <AnimeRelated isLoading={isLoading} />
-                        </div>
+                        {isDesktop ? (
+                            <div className="col-span-1">
+                                <AnimeEpisodes isLoading={isLoading} />
+                                <AnimeReccomendations isLoading={isLoading} />
+                                <AnimeRelated isLoading={isLoading} />
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 ) : (
                     <div className="grid grid-cols-5 gap-5">
-                        <div className="col-span-4">
-                            <div className="mb-4 px-10">
+                        <div className="col-span-5 lg:col-span-4">
+                            <div className="lg:mb-4 lg:px-10 stick top-0">
                                 {episodeId ? (
                                     <AnimeIframePlayer episodeId={episodeId} />
                                 ) : (
                                     <AnimeIframePlayer anime={anime} />
                                 )}
                             </div>
-                            <div className="divider"></div>
-                            <AnimeComment />
-                            <div className="divider"></div>
-                            <AnimeBigDetails anime={anime} />
-                            <div className="divider"></div>
-                            <AnimeCharacters anime={anime} />
+                            <div className="px-3">
+                                <div className="divider"></div>
+                                <AnimeComment />
+                                <div className="divider"></div>
+                                <AnimeBigDetails anime={anime} />
+                                <div className="divider"></div>
+                                <AnimeCharacters anime={anime} />
+                            </div>
                         </div>
-                        <div className="col-span-1">
-                            {anime.nextAiringEpisode ? (
-                                <NextAiringEpisode
-                                    nextAiringEpisode={anime.nextAiringEpisode}
+                        {isDesktop ? (
+                            <div className="col-span-1">
+                                {anime.nextAiringEpisode ? (
+                                    <NextAiringEpisode
+                                        nextAiringEpisode={
+                                            anime.nextAiringEpisode
+                                        }
+                                    />
+                                ) : (
+                                    <></>
+                                )}
+                                <AnimeEpisodes
+                                    anime={anime}
+                                    episodeId={episodeId}
                                 />
-                            ) : (
-                                <></>
-                            )}
-                            <AnimeEpisodes
-                                anime={anime}
-                                episodeId={episodeId}
-                            />
-                            <AnimeReccomendations anime={anime} />
-                            <AnimeRelated anime={anime} />
-                        </div>
+                                <AnimeReccomendations anime={anime} />
+                                <AnimeRelated anime={anime} />
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 )}
             </div>
