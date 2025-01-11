@@ -20,7 +20,7 @@ const Drawer = ({ onClickRandomAnime, setGenreSelection }) => {
                 {/* Page content here */}
                 <label
                     // htmlFor="my-drawer-4"
-                    className="drawer-button btn btn-xs bg-slate-800 border-none btn-primary rounded-sm"
+                    className="drawer-button btn btn-sm bg-slate-800 border-none btn-primary rounded-sm"
                     onClick={() => setDrawerIsOpen(true)}
                 >
                     <AiOutlineMenu />
