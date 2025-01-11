@@ -5,6 +5,7 @@ import { debounce } from "lodash";
 import { router } from "@inertiajs/react";
 import GenreSelection from "./GenreSelection";
 import useBreakpoints from "@/Hooks/useBreakpoints";
+import Drawer from "./Drawer";
 
 const Navbar = () => {
     const { isMobile, isTablet, isDesktop } = useBreakpoints();
@@ -91,6 +92,134 @@ const Navbar = () => {
                     Free Anime Online Watch
                 </button>
             </div>
+            <div className="p-1 flex gap-1">
+                <form
+                    onSubmit={handleSearchSubmit}
+                    className="flex items-center relative"
+                >
+                    <div className="join">
+                        <input
+                            type="text"
+                            className="input input-bordered text-black join-item input-xs w-28 rounded-sm"
+                            placeholder="Search..."
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                        />
+                        <button
+                            type="submit"
+                            className="btn bg-slate-400 ml-2 join-item btn-xs border-none rounded-sm"
+                        >
+                            <GrSearch className="text-gray-200" />
+                        </button>
+                    </div>
+
+                    {/* Dropdown for search results */}
+                    <div
+                        className={`dropdown dropdown-end ${
+                            dropdownOpen &&
+                            !loading &&
+                            (animeResults.length || mangaResults.length)
+                                ? "dropdown-open"
+                                : ""
+                        }`}
+                    >
+                        {dropdownOpen &&
+                        !loading &&
+                        (animeResults.length || mangaResults.length) ? (
+                            <div className="dropdown-content rounded-md z-[1] w-[80vw] mt-4 shadow-lg shadow-slate-500 bg-slate-400">
+                                <div className="grid grid-cols-2 gap-4 bg-slate-500 rounded-t-md py-2 text-gray-200 shadow-lg">
+                                    <div className="text-center text-xs font-bold">
+                                        Manga
+                                    </div>
+                                    <div className="text-center text-xs font-bold">
+                                        Anime
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-1 overflow-y-auto h-[40vh] px-2 pt-2">
+                                    <div>
+                                        {mangaResults.length > 0 ? (
+                                            mangaResults.map((manga) => (
+                                                <div
+                                                    key={manga.id}
+                                                    onClick={() =>
+                                                        onSelectedItem(
+                                                            manga.id,
+                                                            "manga"
+                                                        )
+                                                    }
+                                                    className="flex h-20 items-center rounded-s, bg-slate-300 shadow-md mb-4"
+                                                >
+                                                    <img
+                                                        src={manga.image}
+                                                        alt={manga.title}
+                                                        className="h-full w-16 object-cover bg-white mr-4 rounded-s-sm"
+                                                    />
+                                                    <div className="p-1">
+                                                        <h2 className="font-bold text-xs">
+                                                            {manga.title}
+                                                        </h2>
+                                                        <p className="text-xs font-extralight text-gray-500 capitalize">
+                                                            {manga.status}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No manga found</p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        {animeResults.length > 0 ? (
+                                            animeResults.map((anime) => (
+                                                <div
+                                                    key={anime.id}
+                                                    onClick={() =>
+                                                        onSelectedItem(
+                                                            anime.id,
+                                                            "anime"
+                                                        )
+                                                    }
+                                                    className="flex h-20 items-center rounded-sm bg-slate-300 shadow-md mb-4 hover:scale-y-105 transition-transform duration-200 ease-out hover:cursor-pointer"
+                                                >
+                                                    <img
+                                                        src={anime.image}
+                                                        alt={
+                                                            anime.title
+                                                                .userPreferred
+                                                        }
+                                                        className="h-full w-16 object-cover bg-white mr-4 rounded-s-sm"
+                                                    />
+                                                    <div>
+                                                        <h2 className="font-bold text-xs">
+                                                            {
+                                                                anime.title
+                                                                    .userPreferred
+                                                            }
+                                                        </h2>
+                                                        <p className="text-xs font-extralight text-gray-500">
+                                                            {anime.status}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No anime found</p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : null}
+                    </div>
+                </form>
+                {isMobile ? (
+                    <Drawer
+                        onClickRandomAnime={onClickRandomAnime}
+                        setGenreSelection={setGenreSelection}
+                    />
+                ) : (
+                    <></>
+                )}
+            </div>
 
             {isDesktop ? (
                 <>
@@ -126,8 +255,8 @@ const Navbar = () => {
                             <></>
                         )}
                     </div>
+                    {/* Search bar */}
                     <div>
-                        {/* Search bar */}
                         <form
                             onSubmit={handleSearchSubmit}
                             className="flex items-center relative"

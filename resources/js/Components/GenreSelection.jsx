@@ -1,7 +1,8 @@
+import useBreakpoints from "@/Hooks/useBreakpoints";
 import { router } from "@inertiajs/react";
 import React from "react";
 
-const GenreSelection = ({ setGenreSelection }) => {
+const GenreSelection = ({ setGenreSelection, setDrawerIsOpen }) => {
     const genres = [
         "Action",
         "Adventure",
@@ -29,10 +30,10 @@ const GenreSelection = ({ setGenreSelection }) => {
     };
 
     return (
-        <div className="grid grid-cols-5 gap-2">
+        <div className="lg:grid lg:grid-cols-5 lg:gap-2 w-full">
             {genres.map((genre) => (
                 <button
-                    className="bg-slate-200 btn btn-sm"
+                    className="bg-slate-200 btn btn-sm w-full rounded-sm"
                     onClick={() => onSelectedGenre(genre)}
                 >
                     {genre}

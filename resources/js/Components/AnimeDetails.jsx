@@ -4,6 +4,10 @@ import React, { useEffect, useState } from "react";
 const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
     const [isNearBottom, setIsNearBottom] = useState(false);
 
+    // Define custom logic or a list of indices for left alignment
+    const leftAlignedIndices = [5, 6, 7, 13, 14, 15, 21, 22, 23]; // Example indices for left alignment
+    const isLeftAligned = leftAlignedIndices.includes(index); // Determine alignment based on the custom list
+
     // Function to check if the component is near the bottom of the screen
     const checkPosition = () => {
         const bottomOffset = 100; // Offset to trigger the "near bottom" detection
@@ -28,8 +32,6 @@ const AnimeDetails = ({ anime, index, data, hoveredAnime }) => {
     const onSelectedAnime = (animeId) => {
         router.visit("/anime/" + animeId);
     };
-
-    const isLeftAligned = [6, 7, 8, 9].includes(index % 10); // Check if last digit is 8, 9, or 0
 
     return (
         <div

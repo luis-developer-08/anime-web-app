@@ -8,7 +8,7 @@ const Genre = ({ genreId }) => {
     return (
         <div>
             <Head title={genreId} />
-            <div className="px-20">
+            <div className="px-5 lg:px-20">
                 <FlexAnimeGenre genre={genreId} />
             </div>
         </div>
