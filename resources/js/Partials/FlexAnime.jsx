@@ -43,7 +43,7 @@ const FlexAnime = ({ category }) => {
                 <div className="flex items-center gap-5">
                     {isLoading ? (
                         <button
-                            className="btn bg-slate-500 btn-xs uppercase"
+                            className="btn bg-slate-500 btn-xs rounded-sm border-none uppercase"
                             disabled
                         >
                             <GrPrevious size={8} />
@@ -52,7 +52,7 @@ const FlexAnime = ({ category }) => {
                         <>
                             {data.currentPage > 1 ? (
                                 <button
-                                    className="btn bg-slate-500 btn-xs uppercase"
+                                    className="btn bg-slate-500 btn-xs rounded-sm border-none uppercase"
                                     onClick={() =>
                                         setPage((prevPage) => prevPage - 1)
                                     }
@@ -61,7 +61,7 @@ const FlexAnime = ({ category }) => {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn bg-slate-500 btn-xs uppercase"
+                                    className="btn bg-slate-500 btn-xs rounded-sm border-none uppercase"
                                     disabled
                                 >
                                     <GrPrevious size={8} />
@@ -74,7 +74,7 @@ const FlexAnime = ({ category }) => {
                     </h1>
                     {isLoading ? (
                         <button
-                            className="btn bg-slate-500 btn-xs uppercase"
+                            className="btn bg-slate-500 btn-xs rounded-sm border-none uppercase"
                             disabled
                         >
                             <GrNext size={8} />
@@ -83,7 +83,7 @@ const FlexAnime = ({ category }) => {
                         <>
                             {data.hasNextPage ? (
                                 <button
-                                    className="btn bg-slate-500 btn-xs uppercase"
+                                    className="btn bg-slate-500 btn-xs rounded-sm border-none uppercase"
                                     onClick={() =>
                                         setPage((prevPage) => prevPage + 1)
                                     }
@@ -92,7 +92,7 @@ const FlexAnime = ({ category }) => {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn bg-slate-500 btn-xs uppercase"
+                                    className="btn bg-slate-500 btn-xs rounded-sm border-none uppercase"
                                     disabled
                                 >
                                     <GrNext size={8} />

@@ -78,7 +78,7 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
                 <div className="join">
                     <button
                         onClick={handlePrev}
-                        className="join-item btn btn-xs bg-slate-300 border-0"
+                        className="join-item btn btn-xs rounded-sm bg-slate-300 border-0"
                         disabled={currentEpisodeIndex <= 0}
                     >
                         Prev
@@ -91,7 +91,7 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
                     />
                     <button
                         onClick={handleNext}
-                        className="join-item btn btn-xs bg-slate-300 border-0"
+                        className="join-item btn btn-xs rounded-sm bg-slate-300 border-0"
                         disabled={
                             currentEpisodeIndex === -1 ||
                             currentEpisodeIndex >= episodes.length - 1
@@ -107,7 +107,7 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
                         {Array.from({ length: 12 }).map((_, index) => (
                             <div
                                 key={index}
-                                className="w-16 h-8 rounded-md skeleton bg-slate-300"
+                                className="w-16 h-8 rounded-sm border-none skeleton bg-slate-300"
                             ></div>
                         ))}
                     </div>
@@ -115,10 +115,10 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
                     groupedEpisodes.map((group, groupIndex) => (
                         <div
                             key={groupIndex}
-                            className="mb-1 border rounded-md shadow-sm"
+                            className="mb-1 border rounded-sm border-none shadow-sm"
                         >
                             <div
-                                className="flex justify-between items-center px-4 py-2 cursor-pointer"
+                                className="flex justify-between items-center px-4 py-2 cursor-pointer bg-slate-300"
                                 onClick={() => toggleGroup(groupIndex)}
                             >
                                 <h2 className="text-xs lg:text-lg">
@@ -127,7 +127,7 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
                                 </h2>
                             </div>
                             {expandedGroup === groupIndex && (
-                                <div className="grid grid-cols-5 p-1">
+                                <div className="grid grid-cols-5 p-1 gap-1">
                                     {group.map((episode) => (
                                         <button
                                             onClick={() =>
@@ -137,7 +137,7 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
                                             }
                                             key={episode.id}
                                             disabled={episode.id === episodeId}
-                                            className={`btn btn-sm rounded-md w-full text-xs ${
+                                            className={`btn btn-sm rounded-sm border-none w-full text-xs ${
                                                 episode.id === episodeId
                                                     ? "bg-gray-500 text-white cursor-not-allowed"
                                                     : "bg-slate-400"

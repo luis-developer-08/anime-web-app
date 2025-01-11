@@ -32,19 +32,26 @@ const Drawer = ({ onClickRandomAnime, setGenreSelection }) => {
                     aria-label="close sidebar"
                     className="drawer-overlay"
                 ></label>
-                <ul className="menu bg-slate-300/90 text-base-content min-h-full w-[80vw] px-4 space-y-2">
+                <ul className="menu bg-slate-300/90 text-base-content min-h-full w-[80vw] space-y-2 p-1">
                     {/* Sidebar content here */}
                     <div className="flex justify-end">
                         <button
-                            className="btn btn-sm bg-slate-500 border-none text-gray-300 rounded-sm"
+                            className="btn btn-sm bg-slate-700 border-none text-gray-300 rounded-sm mt-1 mb-10"
                             onClick={() => setDrawerIsOpen(false)}
                         >
                             <AiOutlineClose />
                         </button>
                     </div>
+                    <div className="divider m-0"></div>
+
+                    <li>
+                        <MobileGenreSelection
+                            setDrawerIsOpen={setDrawerIsOpen}
+                        />
+                    </li>
                     <li>
                         <button
-                            className="btn btn-sm bg-slate-500 border-none text-gray-300 rounded-sm"
+                            className="btn btn-sm bg-slate-500 border-none text-gray-300 rounded-sm mx-4"
                             onClick={() => {
                                 setDrawerIsOpen(false);
                                 onClickRandomAnime();
@@ -52,11 +59,6 @@ const Drawer = ({ onClickRandomAnime, setGenreSelection }) => {
                         >
                             RANDOM ANIME
                         </button>
-                    </li>
-                    <li>
-                        <MobileGenreSelection
-                            setDrawerIsOpen={setDrawerIsOpen}
-                        />
                     </li>
                 </ul>
             </div>

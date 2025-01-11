@@ -110,9 +110,9 @@ const Anime = ({ animeId }) => {
                                 )}
 
                                 <div className="divider"></div>
-                                <AnimeComment />
-                                <div className="divider"></div>
                                 <AnimeBigDetails anime={anime} />
+                                <div className="divider"></div>
+                                <AnimeComment />
                                 <div className="divider"></div>
                                 <AnimeCharacters anime={anime} />
                             </div>

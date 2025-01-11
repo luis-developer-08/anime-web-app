@@ -47,7 +47,7 @@ const FlexAnimeGenre = ({ genre }) => {
                 <div className="flex items-center gap-5">
                     {isLoading ? (
                         <button
-                            className="btn bg-slate-500 btn-xs uppercase"
+                            className="btn bg-slate-500 btn-xs rounded-sm uppercase"
                             disabled
                         >
                             <GrPrevious />
@@ -56,7 +56,7 @@ const FlexAnimeGenre = ({ genre }) => {
                         <>
                             {data.currentPage > 1 ? (
                                 <button
-                                    className="btn bg-slate-500 btn-xs uppercase"
+                                    className="btn bg-slate-500 btn-xs rounded-sm uppercase"
                                     onClick={() =>
                                         setPage((prevPage) => prevPage - 1)
                                     }
@@ -65,7 +65,7 @@ const FlexAnimeGenre = ({ genre }) => {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn bg-slate-500 btn-xs uppercase"
+                                    className="btn bg-slate-500 btn-xs rounded-sm uppercase"
                                     disabled
                                 >
                                     <GrPrevious />
@@ -78,7 +78,7 @@ const FlexAnimeGenre = ({ genre }) => {
                     </h1>
                     {isLoading ? (
                         <button
-                            className="btn bg-slate-500 btn-xs uppercase"
+                            className="btn bg-slate-500 btn-xs rounded-sm uppercase"
                             disabled
                         >
                             <GrNext size={8} />
@@ -87,7 +87,7 @@ const FlexAnimeGenre = ({ genre }) => {
                         <>
                             {data.hasNextPage ? (
                                 <button
-                                    className="btn bg-slate-500 btn-xs uppercase"
+                                    className="btn bg-slate-500 btn-xs rounded-sm uppercase"
                                     onClick={() =>
                                         setPage((prevPage) => prevPage + 1)
                                     }
@@ -96,7 +96,7 @@ const FlexAnimeGenre = ({ genre }) => {
                                 </button>
                             ) : (
                                 <button
-                                    className="btn bg-slate-500 btn-xs uppercase"
+                                    className="btn bg-slate-500 btn-xs rounded-sm uppercase"
                                     disabled
                                 >
                                     <GrNext size={8} />
@@ -147,7 +147,7 @@ const FlexAnimeGenre = ({ genre }) => {
                                   onClick={() => onSelectedAnime(anime.id)}
                                   src={anime.image}
                                   alt={anime.title.userPreferred}
-                                  className="w-full h-full rounded-sm lg:shadow-lg shadow-black lg:hover:scale-125 lg:hover:z-10 transition-transform duration-300 ease-out relative"
+                                  className="object-cover w-full h-full rounded-sm lg:shadow-lg shadow-black lg:hover:scale-125 lg:hover:z-10 transition-transform duration-300 ease-out relative"
                               />
                               {hoveredAnime?.id === anime.id && (
                                   <AnimeDetails
