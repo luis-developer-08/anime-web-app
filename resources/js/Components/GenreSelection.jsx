@@ -30,7 +30,7 @@ const GenreSelection = ({ setGenreSelection, setDrawerIsOpen }) => {
     };
 
     return (
-        <div className="lg:grid lg:grid-cols-5 lg:gap-2 w-full">
+        <div className="grid grid-cols-5 lg:gap-2 w-full">
             {genres.map((genre) => (
                 <button
                     className="bg-slate-200 btn btn-sm w-full rounded-sm"
