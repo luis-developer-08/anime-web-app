@@ -74,7 +74,7 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
     return (
         <div className="mb-5">
             <div className="flex justify-between items-center">
-                <h1 className="text-lg font-bold">Episodes</h1>
+                <h1 className="text-xs lg:text-lg font-bold">Episodes</h1>
                 <div className="join">
                     <button
                         onClick={handlePrev}
@@ -121,7 +121,7 @@ const AnimeEpisodes = ({ anime = {}, isLoading, episodeId }) => {
                                 className="flex justify-between items-center px-4 py-2 cursor-pointer"
                                 onClick={() => toggleGroup(groupIndex)}
                             >
-                                <h2 className="text-sm">
+                                <h2 className="text-xs lg:text-lg">
                                     Episodes {groupIndex * 100 + 1} -{" "}
                                     {(groupIndex + 1) * 100}
                                 </h2>
