@@ -1,12 +1,15 @@
+import useBreakpoints from "@/Hooks/useBreakpoints";
 import React from "react";
 
 const AnimeCharacters = ({ anime, isLoading }) => {
+    const { isDesktop } = useBreakpoints();
+
     const skeletonLoader = Array.from({ length: 8 }); // Array for skeleton placeholders
 
     return (
         <div>
-            <h1 className="font-thin text-lg mb-6">Characters</h1>
-            <div className="grid grid-cols-4 gap-6">
+            <h1 className="font-bold text-xs lg:text-lg mb-6 ">Characters</h1>
+            <div className="grid grid-cols-3 lg:grid-cols-4 gap-1 lg:gap-6">
                 {isLoading
                     ? skeletonLoader.map((_, index) => (
                           <div
@@ -42,47 +45,53 @@ const AnimeCharacters = ({ anime, isLoading }) => {
                     : anime.characters.map((character) => (
                           <div
                               key={character.id}
-                              className="border rounded-md shadow-lg p-4 flex flex-col items-center bg-white"
+                              className="border rounded-sm lg:shadow-lg p-2 lg:p-4 flex flex-col items-center bg-white"
                           >
                               {/* Character Image */}
                               <img
                                   src={character.image}
                                   alt={character.name.full}
-                                  className="w-40 h-40 rounded-full object-cover mb-4"
+                                  className="w-20 lg:w-40 h-20 lg:h-40 rounded-full object-cover mb-4"
                               />
 
                               {/* Character Name and Role */}
-                              <h2 className="text-md font-bold text-center mb-1">
+                              <h2 className="text-xs lg:text-md font-bold text-center mb-1">
                                   {character.name.full}
                               </h2>
-                              <p className="text-sm text-gray-500 mb-4">
+                              <p className="text-xs lg:text-sm text-gray-500 mb-4">
                                   {character.role}
                               </p>
 
                               {/* Voice Actors */}
-                              <div className="w-full">
-                                  <h3 className="text-sm font-semibold mb-2">
-                                      Voice Actors:
-                                  </h3>
-                                  <ul className="text-sm text-gray-700 space-y-2 h-40 overflow-y-auto">
-                                      {character.voiceActors.map((actor) => (
-                                          <li
-                                              key={actor.id}
-                                              className="flex items-center space-x-2"
-                                          >
-                                              <img
-                                                  src={actor.image}
-                                                  alt={actor.name.full}
-                                                  className="w-8 h-8 rounded-full object-cover"
-                                              />
-                                              <span>
-                                                  {actor.name.full} (
-                                                  {actor.language})
-                                              </span>
-                                          </li>
-                                      ))}
-                                  </ul>
-                              </div>
+                              {isDesktop ? (
+                                  <div className="w-full">
+                                      <h3 className="text-sm font-semibold mb-2">
+                                          Voice Actors:
+                                      </h3>
+                                      <ul className="text-sm text-gray-700 space-y-2 h-40 overflow-y-auto">
+                                          {character.voiceActors.map(
+                                              (actor) => (
+                                                  <li
+                                                      key={actor.id}
+                                                      className="flex items-center space-x-2"
+                                                  >
+                                                      <img
+                                                          src={actor.image}
+                                                          alt={actor.name.full}
+                                                          className="w-8 h-8 rounded-full object-cover"
+                                                      />
+                                                      <span>
+                                                          {actor.name.full} (
+                                                          {actor.language})
+                                                      </span>
+                                                  </li>
+                                              )
+                                          )}
+                                      </ul>
+                                  </div>
+                              ) : (
+                                  <></>
+                              )}
                           </div>
                       ))}
             </div>

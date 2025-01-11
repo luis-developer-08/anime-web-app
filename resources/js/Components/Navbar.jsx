@@ -82,7 +82,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar bg-slate-600 lg:bg-slate-600/90 items-center shadow-md fixed top-0 lg:px-16 z-50">
+        <div className="flex lg:p-2 bg-slate-600 lg:bg-slate-600/90 items-center shadow-md lg:px-16 z-50 fixed w-full">
             <div className="flex-1">
                 <button
                     className="btn btn-ghost text-sm lg:text-xl text-white"

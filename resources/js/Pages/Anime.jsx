@@ -51,15 +51,25 @@ const Anime = ({ animeId }) => {
                 {isLoading ? (
                     <div className="grid lg:grid-cols-5 gap-5">
                         <div className="lg:col-span-4">
-                            <div className="lg:mb-4 px-10">
+                            <div
+                                className={`lg:mb-4 lg:px-10 ${
+                                    isMobile ? "fixed top-12 w-full" : ""
+                                }`}
+                            >
                                 <AnimeIframePlayer
                                     isLoadingAnimeIframePlayer={isLoading}
                                 />
                             </div>
-                            <div className="divider"></div>
-                            <AnimeBigDetails isLoading={isLoading} />
-                            <div className="divider"></div>
-                            <AnimeCharacters isLoading={isLoading} />
+                            <div
+                                className={`px-3  ${
+                                    isMobile ? "mt-[35vh]" : ""
+                                }`}
+                            >
+                                <div className="divider"></div>
+                                <AnimeBigDetails isLoading={isLoading} />
+                                <div className="divider"></div>
+                                <AnimeCharacters isLoading={isLoading} />
+                            </div>
                         </div>
                         {isDesktop ? (
                             <div className="col-span-1">
@@ -74,14 +84,31 @@ const Anime = ({ animeId }) => {
                 ) : (
                     <div className="grid grid-cols-5 gap-5">
                         <div className="col-span-5 lg:col-span-4">
-                            <div className="lg:mb-4 lg:px-10 stick top-0">
+                            <div
+                                className={`lg:mb-4 lg:px-10 ${
+                                    isMobile ? "fixed top-12 w-full z-40" : ""
+                                }`}
+                            >
                                 {episodeId ? (
                                     <AnimeIframePlayer episodeId={episodeId} />
                                 ) : (
                                     <AnimeIframePlayer anime={anime} />
                                 )}
                             </div>
-                            <div className="px-3">
+                            <div
+                                className={`px-3 ${
+                                    isMobile ? "mt-[35vh]" : ""
+                                }`}
+                            >
+                                {isMobile ? (
+                                    <AnimeEpisodes
+                                        anime={anime}
+                                        episodeId={episodeId}
+                                    />
+                                ) : (
+                                    <></>
+                                )}
+
                                 <div className="divider"></div>
                                 <AnimeComment />
                                 <div className="divider"></div>

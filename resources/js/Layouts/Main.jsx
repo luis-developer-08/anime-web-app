@@ -41,9 +41,13 @@ const Main = ({ children }) => {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <div className="flex flex-col min-h-screen">
+            <div
+                className={`flex flex-col min-h-screen ${
+                    isMobile ? "overflow-x-hidden" : ""
+                }`}
+            >
                 <Navbar />
-                <main className="flex-1 pt-24 pb-5 bg-slate-200">
+                <main className="flex-1 pt-10 lg:pt-20 pb-5 bg-slate-200">
                     {isOnline ? (
                         <>
                             {children}

@@ -8,7 +8,7 @@ const AnimeBigDetails = ({ anime, isLoading }) => {
             {isLoading ? (
                 <>
                     <div className="col-span-1">
-                        <div className="w-full h-[50vh] rounded-md skeleton bg-slate-300"></div>
+                        <div className="w-full h-20 lg:h-[50vh] rounded-sm skeleton bg-slate-300"></div>
                     </div>
 
                     <div className="col-span-4">
@@ -31,36 +31,36 @@ const AnimeBigDetails = ({ anime, isLoading }) => {
                 </>
             ) : (
                 <>
-                    <div className="col-span-1">
+                    <div className="col-span-2 lg:col-span-1">
                         <img
                             onClick={() => onSelectedAnime(anime.id)}
                             src={anime.image}
                             alt={anime.title.userPreferred}
-                            className="w-full h-[50vh] rounded-md shadow-lg shadow-black object-cover"
+                            className="w-full h-36 lg:h-[50vh] rounded-sm lg:shadow-lg shadow-black object-cover"
                         />
                     </div>
-                    <div className="col-span-4">
-                        <h1 className="font-bold text-xl text-center">
+                    <div className="col-span-3 lg:col-span-4">
+                        <h1 className="font-bold text-xs lg:text-xl text-center">
                             {anime.title.english || anime.title.userPreferred}
                         </h1>
 
                         <div
-                            className="text-md font-thin mt-5 text-justify"
+                            className="text-xs lg:text-md font-extralight mt-5 text-justify"
                             dangerouslySetInnerHTML={{
                                 __html: anime.description,
                             }}
                         />
 
-                        <div className="flex justify-between mt-5 items-center">
-                            <div className="flex gap-1">
+                        <div className="lg:flex lg:justify-between mt-5 items-center">
+                            <div className="flex flex-wrap gap-1 text-xs lg:text-md">
                                 Genre(s):{" "}
                                 {anime.genres.map((genre) => (
-                                    <div className="bg-slate-300 py-1 px-2 text-xs rounded-md">
-                                        {genre}
+                                    <div className="lg:bg-slate-300 lg:py-1 lg:px-2 text-xs rounded-md">
+                                        {genre},
                                     </div>
                                 ))}
                             </div>
-                            <div className="p-1 flex gap-1">
+                            <div className="lg:p-1 flex gap-1 text-xs lg:text-md">
                                 <div>Status:</div>
                                 <div className="flex items-center gap-1">
                                     {anime.status}
@@ -69,7 +69,7 @@ const AnimeBigDetails = ({ anime, isLoading }) => {
                         </div>
 
                         <div className="mt-5">
-                            <div className="p-1 flex gap-1">
+                            <div className="lg:p-1 flex gap-1 text-xs lg:text-md">
                                 <div>Rating:</div>
                                 <div className="flex items-center gap-1">
                                     {anime.rating ? anime.rating : 0}
@@ -79,7 +79,7 @@ const AnimeBigDetails = ({ anime, isLoading }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="p-1 flex gap-1">
+                            <div className="lg:p-1 flex gap-1 text-xs lg:text-md">
                                 <div>Popularity:</div>
                                 <div className="flex items-center gap-1">
                                     {anime.popularity

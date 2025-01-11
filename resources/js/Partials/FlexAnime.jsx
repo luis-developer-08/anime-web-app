@@ -148,7 +148,7 @@ const FlexAnime = ({ category }) => {
                                   onClick={() => onSelectedAnime(anime.id)}
                                   src={anime.image}
                                   alt={anime.title.userPreferred}
-                                  className={`object-cover w-full h-full rounded-sm lg:shadow-lg shadow-black hover:scale-125 transition-transform duration-300 ease-out relative`}
+                                  className={`object-cover w-full h-full rounded-sm lg:shadow-lg shadow-black lg:hover:scale-125 transition-transform duration-300 ease-out relative`}
                               />
                               {hoveredAnime?.id === anime.id && (
                                   <AnimeDetails

@@ -49,7 +49,7 @@ const AnimeIframePlayer = ({
     }, []);
 
     return (
-        <div style={{ width: "100%" }} className="sticky top-0">
+        <div style={{ width: "100%" }}>
             {isLoadingAnimeIframePlayer ? (
                 <div
                     style={{
@@ -92,7 +92,7 @@ const AnimeIframePlayer = ({
                                         zIndex: 10,
                                     }}
                                 >
-                                    <span className="loading loading-spinner loading-lg text-white"></span>
+                                    <span className="loading loading-spinner loading-lg text-white m-0"></span>
                                 </div>
                             ) : (
                                 <Iframe
