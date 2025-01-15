@@ -22,7 +22,7 @@ const NewsFeeds = () => {
     return (
         <div>
             <h1 className="text-xs lg:text-2xl">News Feeds</h1>
-            <Feeds />
+            <Feeds topic={selectedTopic} />
         </div>
     );
 };
