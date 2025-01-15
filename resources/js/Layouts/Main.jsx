@@ -54,7 +54,7 @@ const Main = ({ children }) => {
                             <div className="divider"></div>
                             <div className="px-5 lg:px-20">
                                 <div className="grid grid-cols-5 gap-3 lg:gap-10">
-                                    <div className="col-span-5 lg:col-span-4">
+                                    {/* <div className="col-span-5 lg:col-span-4">
                                         <NewsFeeds />
                                     </div>
                                     {isDesktop ? (
@@ -65,7 +65,7 @@ const Main = ({ children }) => {
                                         </>
                                     ) : (
                                         <></>
-                                    )}
+                                    )} */}
                                 </div>
                             </div>
                         </>
